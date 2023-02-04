@@ -1,26 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
+import { IAuthUserInfo, IUser } from '../types/User'
 
-interface CounterState {
-  value: any
-}
 
-const initialState: CounterState = {
-  value: 0
+const initialState: IAuthUserInfo = {
+    isAuth: false,
+    username: '',
+    password: '',
+    token: ''
 }
 
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    increment: (state, action: PayloadAction<any>) => {
-      return state.value += 1
+    login: (state, action: PayloadAction<{username: string, password: string, token: string}>) => {
+      return state = {
+        isAuth: true,
+        username: action.payload.username,
+        password: action.payload.password,
+        token: action.payload.token
+      }
     }
   }
 })
 
-export const { increment } = mainSlice.actions
+export const { login } = mainSlice.actions
 
 export default mainSlice.reducer
 

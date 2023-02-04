@@ -35,6 +35,7 @@
                 "ignoreComments": true,
                 "ignoreUrls": true
             }
-        ]
+        ],
+        "no-debugger": "warn"
     }
 }
