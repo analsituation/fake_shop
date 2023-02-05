@@ -7,15 +7,13 @@ import { setProducts } from '../../store/productsSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
 import Spinner from '../../components/LoadingSpinner/Spinner'
+import Search from '../../components/Search/Search'
 
 const Products = () => {
 
   const dispatch = useAppDispatch()
-  const quantity = useAppSelector(state => state.products.quantity)
-
   let { data, isLoading } = useLoadPartQuery(6)
   const [loadAllProducts, { data: newData, isLoading: newLoading }] = useLazyLoadAllQuery()
-
 
   useEffect(() => {
     if (data) {
@@ -25,8 +23,6 @@ const Products = () => {
       dispatch(setProducts(newData))
     }
   }, [data, newData])
-
-
 
 
   // const loadline = useRef<any>(null)
@@ -43,9 +39,8 @@ const Products = () => {
 
   return (
     <>
-
       <div className={styles.filter_block}>
-        <div className={styles.product_search}><input type='text' placeholder='Search' /></div>
+        <Search />
         <div className={styles.product_sort}>
           <span className={styles.category_item}>jewelery</span>
           <span className={styles.category_item}>electronic</span>
@@ -69,7 +64,7 @@ const Products = () => {
 
       </div>
       {!newData && !newLoading && !isLoading && <div className={styles.load_all}>
-        <CustomBtn text="Load all products" onClick={() => loadAllProducts(null)}/>
+        <CustomBtn text='Load all products' onClick={() => loadAllProducts(null)} />
       </div>}
       {newLoading && <div className={styles.spinner_wrapper}><Spinner /></div>}
 
