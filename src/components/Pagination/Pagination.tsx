@@ -3,7 +3,7 @@ import React from 'react'
 const Pagination = () => {
   return (
     <div>
-      1 2 3
+      prev 1 next
     </div>
   )
 }

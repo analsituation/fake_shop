@@ -7,7 +7,7 @@ export const userApi = createApi({
   }),
   endpoints: (build) => ({
     products: build.query({
-      query: (limit: 10) => ({
+      query: (limit = 10) => ({
         url: `products?limit=${limit}`
       })
     }),
@@ -28,5 +28,5 @@ export const userApi = createApi({
   })
 })
 
-export const { useLoginMutation } = userApi
+export const { useLoginMutation, useProductsQuery } = userApi
 

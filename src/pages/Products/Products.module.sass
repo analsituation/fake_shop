@@ -1,2 +1,20 @@
+.filter_block
+  @apply flex w-full gap-x-10 items-center
+
+  .product_search
+    input
+      @apply px-3 rounded-2xl shadow-md h-8 focus:outline-0
+  .product_sort
+    @apply rounded-2xl shadow-md bg-white flex h-8 overflow-hidden
+    .category_item
+      @apply text-slate-500 cursor-pointer transition-all hover:bg-slate-200 px-4 h-full flex items-center
+      &:first-child
+        @apply pl-8
+      &:last-child
+        @apply pr-8
+
 .product_list
-  @apply text-cyan-700
+  @apply mt-12 grid grid-cols-3 gap-6
+
+.pagination_block
+  @apply mx-auto w-fit mt-10 text-cyan-700
