@@ -2,17 +2,47 @@
   @apply flex justify-around items-center py-6
 
   .nav
-    @apply py-1 px-10 bg-slate-900 text-gray-100 rounded-full
+    @apply py-2 px-10 bg-slate-800 text-gray-100 rounded-full
     ul
       @apply flex gap-10
       .link_element
-        @apply block hover:text-gray-300 transition-all
-
-  .user_block
-    @apply flex gap-4 items-center
-
-    .user_photo
-      @apply max-h-10 rounded-full
-
+        @apply block font-light uppercase
+        letter-spacing: 2px
+        font-size: 12px
+        position: relative
+        transition: all 0.4s ease
+      .link_element::after
+        content: ""
+        position: absolute
+        height: 1px
+        background-color: #16afda
+        width: 0
+        left: 50%
+        bottom: 0
+        transform: translateX(-50%)
+        transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) all
+      .link_element:hover
+        color: #16afda
+      .link_element:hover::after
+        width: 100%
   .logo
-    @apply uppercase text-2xl font-medium text-center
+    @apply uppercase text-2xl font-medium text-center text-cyan-600
+
+.user_block
+  @apply inline-block items-center relative
+
+  .user_wrapper
+    @apply flex gap-4 items-center relative
+
+.user_photo
+  @apply max-h-10 rounded-full
+
+.drop_menu
+  @apply px-2 py-5 bg-gray-300 border rounded absolute z-10 shadow-md text-center
+  display: none
+  min-width: 150px
+  p
+    @apply text-cyan-700 text-left mb-2
+
+.user_block:hover .drop_menu
+  display: block

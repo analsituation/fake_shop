@@ -1,5 +1,3 @@
-import { stringify } from 'querystring'
-
 export interface Geolocation {
   lat: string;
   long: string;

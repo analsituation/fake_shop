@@ -1,10 +1,10 @@
-import React, { FC, PropsWithChildren, ReactNode } from 'react'
+import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAppSelector } from '../hooks/redux'
 
-type Props = {
+interface Props {
   children: JSX.Element
-};
+}
 
 export function RequireAuth({children}: Props) {
   const location = useLocation()

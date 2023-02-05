@@ -1,11 +1,17 @@
 import React from 'react'
+import styles from './CustomBtn.module.sass'
 
-const Header = () => {
+type Props = {
+  text: string
+  onClick?: () => void
+};
+
+export function CustomBtn({text, onClick}: Props) {
   return (
-    <div>
-      
-    </div>
+    <button className={styles.custom_button} onClick={onClick}>
+      {text}
+    </button>
   )
 }
 
-export default Header
+export default CustomBtn

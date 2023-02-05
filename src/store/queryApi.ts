@@ -6,6 +6,11 @@ export const userApi = createApi({
     baseUrl: 'https://fakestoreapi.com/'
   }),
   endpoints: (build) => ({
+    products: build.query({
+      query: (limit: 10) => ({
+        url: `products?limit=${limit}`
+      })
+    }),
     login: build.mutation({
         query: ({username, password}) => ({
           url: 'auth/login',

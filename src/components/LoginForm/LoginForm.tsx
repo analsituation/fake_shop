@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styles from './LoginForm.module.sass'
-import { useLoginMutation } from '../store/queryApi'
-import { login } from '../store/mainSlice'
-import { useAppDispatch } from '../hooks/redux'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useLoginMutation } from '../../store/queryApi'
+import { login } from '../../store/authSlice'
+import { useAppDispatch } from '../../hooks/redux'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
 
