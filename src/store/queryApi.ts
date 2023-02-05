@@ -6,9 +6,14 @@ export const userApi = createApi({
     baseUrl: 'https://fakestoreapi.com/'
   }),
   endpoints: (build) => ({
-    products: build.query({
-      query: (limit = 10) => ({
+    loadPart: build.query({
+      query: (limit = 6) => ({
         url: `products?limit=${limit}`
+      })
+    }),
+    loadAll: build.query({
+      query: () => ({
+        url: `products`
       })
     }),
     login: build.mutation({
@@ -28,5 +33,5 @@ export const userApi = createApi({
   })
 })
 
-export const { useLoginMutation, useProductsQuery } = userApi
+export const { useLoginMutation, useLoadPartQuery, useLazyLoadAllQuery } = userApi
 

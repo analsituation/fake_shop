@@ -36,6 +36,7 @@
                 "ignoreUrls": true
             }
         ],
-        "no-debugger": "warn"
+        "no-debugger": "warn",
+        "prefer-const": "warn"
     }
 }

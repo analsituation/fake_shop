@@ -4,6 +4,7 @@ import { useLoginMutation } from '../../store/queryApi'
 import { login } from '../../store/authSlice'
 import { useAppDispatch } from '../../hooks/redux'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../LoadingSpinner/Spinner'
 
 const LoginForm = () => {
 
@@ -46,7 +47,7 @@ const LoginForm = () => {
         <button onClick={authorize} className={styles.btn}>
           Login
         </button>
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <Spinner />}
       </form>
     </>
 
