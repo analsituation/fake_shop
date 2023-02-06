@@ -6,32 +6,42 @@ export const userApi = createApi({
     baseUrl: 'https://fakestoreapi.com/'
   }),
   endpoints: (build) => ({
-    loadPart: build.query({
+    loadPartProducts: build.query({
       query: (limit = 6) => ({
         url: `products?limit=${limit}`
       })
     }),
-    loadAll: build.query({
+    loadAllProducts: build.query({
       query: () => ({
         url: `products`
       })
     }),
+    loadCategories: build.query({
+      query: () => ({
+        url: `products/categories`
+      })
+    }),
     login: build.mutation({
-        query: ({username, password}) => ({
-          url: 'auth/login',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          },
-          body:JSON.stringify({
-            username: username,
-            password: password
-          })
+      query: ({ username, password }) => ({
+        url: 'auth/login',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
         })
+      })
     })
   })
 })
 
-export const { useLoginMutation, useLoadPartQuery, useLazyLoadAllQuery } = userApi
+export const {
+  useLoginMutation,
+  useLoadPartProductsQuery,
+  useLazyLoadAllProductsQuery,
+  useLoadCategoriesQuery
+} = userApi
 

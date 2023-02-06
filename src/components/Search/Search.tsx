@@ -14,8 +14,6 @@ const Search = () => {
 
   const inputFocus = useRef(null)
   const [focused, setFocus] = useState(false)
-  const onFocus = () => setFocus(true)
-  const onBlur = () => setFocus(false)
 
   const changeHandler = (e:  React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -53,8 +51,8 @@ const Search = () => {
         onChange={changeHandler}
         value={value}
         ref={inputFocus}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
       />
       { dropdown && focused && <ul className={styles.dropdown}>
         { renderDropdown() }

@@ -1,19 +1,27 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Products.module.sass'
 import ProductCard from './ProductCard'
-import { useLazyLoadAllQuery, useLoadPartQuery } from '../../store/queryApi'
+import {
+  useLazyLoadAllProductsQuery,
+  useLoadCategoriesQuery,
+  useLoadPartProductsQuery
+} from '../../store/queryApi'
 import { IProduct } from '../../types/Product'
-import { setProducts } from '../../store/productsSlice'
+import { filterProducts, setProducts } from '../../store/productsSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
 import Spinner from '../../components/LoadingSpinner/Spinner'
 import Search from '../../components/Search/Search'
+import SortBlock from '../../components/SortBlock/SortBlock'
 
 const Products = () => {
 
   const dispatch = useAppDispatch()
-  let { data, isLoading } = useLoadPartQuery(6)
-  const [loadAllProducts, { data: newData, isLoading: newLoading }] = useLazyLoadAllQuery()
+  const products = useAppSelector(state => state.products.products)
+  const filteredProducts = useAppSelector(state => state.products.filteredProducts)
+  const { data, isLoading } = useLoadPartProductsQuery(6)
+  const { data: categories } = useLoadCategoriesQuery(null)
+  const [loadAllProducts, { data: newData, isLoading: newLoading }] = useLazyLoadAllProductsQuery()
 
   useEffect(() => {
     if (data) {
@@ -37,35 +45,61 @@ const Products = () => {
   //   observer.current.observe(loadline.current)
   // }, [])
 
+  const [activeCategories, setActiveCategories] = useState<string[]>([])
+  const setCategoryHandler = (e: React.MouseEvent<HTMLSpanElement>, el: string) => {
+    if (activeCategories.find(category => category === el)) {
+      setActiveCategories(activeCategories.filter(category => category !== el))
+    } else {
+      setActiveCategories([...activeCategories, el])
+    }
+  }
+
+  useEffect(() => {
+    dispatch(filterProducts(activeCategories))
+    conditionalRender()
+  }, [activeCategories, newData])
+
+  const conditionalRender = () => {
+    if (activeCategories.length === 0) {
+      return (
+        products.map((el: IProduct) => (
+          <ProductCard key={el.id} product={el} />))
+      )
+    } else if (activeCategories.length && filteredProducts.length) {
+      return (
+        filteredProducts.map((el: IProduct) => (
+          <ProductCard key={el.id} product={el} />))
+      )
+    } else if (activeCategories.length && filteredProducts.length === 0) {
+      return (
+        <h3 className={styles.info_message}>
+          There are no matching products on this page. Search among all products?
+        </h3>
+      )
+    }
+  }
+
   return (
     <>
       <div className={styles.filter_block}>
         <Search />
-        <div className={styles.product_sort}>
-          <span className={styles.category_item}>jewelery</span>
-          <span className={styles.category_item}>electronic</span>
-          <span className={styles.category_item}>men&apos;s clothing</span>
-          <span className={styles.category_item}>women&apos;s clothing</span>
-        </div>
+        <SortBlock
+          categories={categories}
+          activeCategories={activeCategories}
+          setCategoryHandler={setCategoryHandler}
+        />
       </div>
 
       {isLoading && <div className={styles.spinner_wrapper}><Spinner /></div>}
 
       <div className={styles.product_list}>
-
-        {!newData && data && data.map((el: IProduct) => (
-            <ProductCard key={el.id} product={el} />
-          )
-        )}
-        {newData && newData.map((el: IProduct) => (
-            <ProductCard key={el.id} product={el} />
-          )
-        )}
-
+        {conditionalRender()}
       </div>
+
       {!newData && !newLoading && !isLoading && <div className={styles.load_all}>
         <CustomBtn text='Load all products' onClick={() => loadAllProducts(null)} />
       </div>}
+
       {newLoading && <div className={styles.spinner_wrapper}><Spinner /></div>}
 
       {/*<div ref={loadline} className={styles.loadline}></div>*/}

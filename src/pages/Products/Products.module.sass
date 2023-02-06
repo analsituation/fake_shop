@@ -1,17 +1,12 @@
 .filter_block
   @apply flex w-full gap-x-10 items-center
 
-  .product_sort
-    @apply rounded-2xl shadow-md bg-white flex h-8 overflow-hidden
-    .category_item
-      @apply text-slate-500 cursor-pointer transition-all hover:bg-slate-200 px-4 h-full flex items-center
-      &:first-child
-        @apply pl-8
-      &:last-child
-        @apply pr-8
-
 .product_list
   @apply mt-12 grid grid-cols-3 gap-6
+
+.info_message
+  @apply block text-3xl text-cyan-700 mx-auto w-full text-center
+  grid-column: 1 / 4
 
 .load_all
   @apply text-center mt-10

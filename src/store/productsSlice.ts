@@ -25,11 +25,15 @@ export const productSlice = createSlice({
       state.filteredProducts = state.products.filter(el =>
         el.title.toLowerCase().includes(action.payload.toLowerCase())
       )
-    }
+    },
+    filterProducts: (state, action: PayloadAction<string[]>) => {
+      state.filteredProducts = state.products.filter(el =>
+        action.payload.includes(el.category))
+    },
   }
 })
 
-export const { setProducts, searchProducts } = productSlice.actions
+export const { setProducts, searchProducts, filterProducts } = productSlice.actions
 
 export default productSlice.reducer
 
