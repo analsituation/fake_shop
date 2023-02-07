@@ -2,16 +2,26 @@ import React from 'react'
 import styles from './ProductCard.module.sass'
 import { IProduct } from '../../types/Product'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
-import { addToCart } from '../../store/productsSlice'
-import { useAppDispatch } from '../../hooks/redux'
+import { addToCart, changeQuantity, removeFromCart } from '../../store/productsSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 
 interface Props {
   product: IProduct
+  quantity?: number
 }
 
-const ProductCard = ({ product }: Props) => {
+const ProductCard = ({ product, quantity }: Props) => {
 
   const dispatch = useAppDispatch()
+
+  const minusHandler = () => {
+    if (quantity === 1) {
+      dispatch(removeFromCart(product.id))
+    }
+    if (quantity) {
+      dispatch(changeQuantity({ productId: product.id, quantity: quantity - 1 }))
+    }
+  }
 
   return (
     <div className={styles.card_item}>
@@ -28,15 +38,24 @@ const ProductCard = ({ product }: Props) => {
         {product.description.length > 150 ?
           (
             <>
-                <span className={styles.part_of_desc}>{product.description.slice(0, 130)}</span><span className={styles.show_desc}> ...read more</span>
-              <span className={styles.long_desc_content}>{ product.description }</span>
+              <span className={styles.part_of_desc}>{product.description.slice(0, 130)}</span><span
+              className={styles.show_desc}> ...read more</span>
+              <span className={styles.long_desc_content}>{product.description}</span>
             </>
-          ) : ( product.description )
+          ) : (product.description)
         }
       </div>
       <div className={styles.buy_block_wrapper}>
         <div className={styles.buy_block}>
-          <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product))}/>
+          {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product.id))} /> : (
+            <div>
+              <span onClick={minusHandler}>-</span>
+              {quantity}
+              <span onClick={() => dispatch(changeQuantity({ productId: product.id, quantity: quantity + 1 }))}>+</span>
+            </div>
+          )
+          }
+
           <span className={styles.price}>
           {product.price}$
         </span>

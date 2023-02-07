@@ -6,3 +6,8 @@ export interface IProduct {
   description: string
   image: string
 }
+
+export interface ProductsInCart {
+  productId: number
+  quantity: number
+}

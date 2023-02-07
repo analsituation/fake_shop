@@ -18,6 +18,7 @@ const Products = () => {
 
   const dispatch = useAppDispatch()
   const products = useAppSelector(state => state.products.products)
+  const productsCart = useAppSelector(state => state.products.prodsInCart)
   const filteredProducts = useAppSelector(state => state.products.filteredProducts)
   const { data, isLoading } = useLoadPartProductsQuery(6)
   const { data: categories } = useLoadCategoriesQuery(null)
@@ -62,13 +63,21 @@ const Products = () => {
   const conditionalRender = () => {
     if (activeCategories.length === 0) {
       return (
-        products.map((el: IProduct) => (
-          <ProductCard key={el.id} product={el} />))
+        products.map((product: IProduct) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            quantity={productsCart.find(el => el.productId === product.id)?.quantity}
+          />))
       )
     } else if (activeCategories.length && filteredProducts.length) {
       return (
-        filteredProducts.map((el: IProduct) => (
-          <ProductCard key={el.id} product={el} />))
+        filteredProducts.map((product: IProduct) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            quantity={productsCart.find(el => el.productId === product.id) ? productsCart[product.id].quantity : 0}
+          />))
       )
     } else if (activeCategories.length && filteredProducts.length === 0) {
       return (

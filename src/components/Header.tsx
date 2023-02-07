@@ -6,9 +6,9 @@ import { MdOutlineClose } from 'react-icons/md'
 
 import { logout } from '../store/authSlice'
 import CustomBtn from './CustomBtn/CustomBtn'
-import { IProduct } from '../types/Product'
+import { IProduct, ProductsInCart } from '../types/Product'
 import styles from './Header.module.sass'
-import { removeFromCart } from '../store/productsSlice'
+import { changeQuantity, removeFromCart } from '../store/productsSlice'
 
 
 interface Props {
@@ -18,10 +18,17 @@ interface Props {
 const Header = ({ setVisible }: Props) => {
 
   const { username, isAuth } = useAppSelector(state => state.main)
-  const cart = useAppSelector(state => state.products.productsInCart)
+  const cart = useAppSelector(state => state.products.prodsInCart)
+  const products = useAppSelector(state => state.products.products)
   const dispatch = useAppDispatch()
   const [cartVisible, setCartVisible] = useState(false)
 
+  const minusHandler = (cardItem: ProductsInCart) => {
+    if (cardItem.quantity === 1) {
+      dispatch(removeFromCart(cardItem.productId))
+    }
+    dispatch(changeQuantity({ productId: cardItem.productId, quantity: cardItem.quantity - 1 }))
+  }
 
   return (
     <header className={styles.container}>
@@ -56,20 +63,28 @@ const Header = ({ setVisible }: Props) => {
           {
             cart.length ? (
               <>
-              <ul>
-              {cart.map((product: IProduct) => (
-                <li className={styles.cart_item} key={product.id}>
-                  <NavLink to="/product/id">{product.title}</NavLink>
-                  <span
-                    className={styles.delete_product}
-                    onClick={() => dispatch(removeFromCart(product))}
-                  >delete</span>
-                </li>
-              ))}
-            </ul>
-              <div className={styles.checkout_button}>
-                <CustomBtn text="Checkout" />
-              </div>
+                <ul>
+                  {cart.map((cardItem: ProductsInCart) => (
+                    <li className={styles.cart_item} key={cardItem.productId}>
+
+                      <span onClick={() => minusHandler(cardItem)}>-</span>
+                      {cardItem.quantity}
+                      <span onClick={() => dispatch(changeQuantity({
+                        productId: cardItem.productId,
+                        quantity: cardItem.quantity + 1
+                      }))}>+</span>
+
+                      <NavLink to='/product/id'>{products[cardItem.productId].title}</NavLink>
+                      <span
+                        className={styles.delete_product}
+                        onClick={() => dispatch(removeFromCart(cardItem.productId))}
+                      >delete</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className={styles.checkout_button}>
+                  <CustomBtn text='Checkout' />
+                </div>
               </>
             ) : <p>Your cart is empty ???!! Why</p>
           }
@@ -77,19 +92,17 @@ const Header = ({ setVisible }: Props) => {
         </div>
         {isAuth ? (
           <>
-
             <div className={styles.user_wrapper}>
               <img className={styles.user_photo} src='https://avatars.githubusercontent.com/u/97411966?v=4' alt='alt' />
               <div className={styles.username}>
                 {username}
               </div>
-              <span className={styles.button_wrapper}><CustomBtn text='Logout'
-                                                                 onClick={() => dispatch(logout())} /></span>
+              <span className={styles.button_wrapper}>
+                <CustomBtn text='Logout'
+                           onClick={() => dispatch(logout())}
+                />
+              </span>
             </div>
-            {/*<div className={styles.drop_menu}>*/}
-            {/*  <p>Some userinfo here later..</p>*/}
-            {/*  <CustomBtn text="Logout" onClick={() => dispatch(logout())}/>*/}
-            {/*</div>*/}
           </>
         ) : (
           <CustomBtn text='Login' onClick={() => setVisible(true)} />
