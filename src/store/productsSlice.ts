@@ -4,13 +4,13 @@ import { IProduct } from '../types/Product'
 interface StateType {
   products: IProduct[]
   filteredProducts: IProduct[]
-  quantity: number
+  productsInCart: IProduct[]
 }
 
 const initialState: StateType = {
   products: [],
   filteredProducts: [],
-  quantity: 0
+  productsInCart: []
 }
 
 export const productSlice = createSlice({
@@ -19,7 +19,6 @@ export const productSlice = createSlice({
   reducers: {
     setProducts: (state, action: PayloadAction<IProduct[]>) => {
       state.products = action.payload
-      state.quantity = action.payload.length
     },
     searchProducts: (state, action: PayloadAction<string>) => {
       state.filteredProducts = state.products.filter(el =>
@@ -30,10 +29,22 @@ export const productSlice = createSlice({
       state.filteredProducts = state.products.filter(el =>
         action.payload.includes(el.category))
     },
+    addToCart: (state, action: PayloadAction<IProduct>) => {
+      state.productsInCart.push(action.payload)
+    },
+    removeFromCart: (state, action: PayloadAction<IProduct>) => {
+      state.productsInCart.splice(state.productsInCart.indexOf(action.payload), 1)
+    }
   }
 })
 
-export const { setProducts, searchProducts, filterProducts } = productSlice.actions
+export const {
+  setProducts,
+  searchProducts,
+  filterProducts,
+  addToCart,
+  removeFromCart
+} = productSlice.actions
 
 export default productSlice.reducer
 

@@ -1,8 +1,10 @@
 .container
-  @apply flex justify-around items-center py-6
+  @apply grid items-center px-10 py-6
+  grid-template-columns: repeat(3, 1fr)
+  align-items: center
 
   .nav
-    @apply py-2 px-10 bg-slate-800 text-gray-100 rounded-full
+    @apply justify-self-center py-2 px-10 bg-slate-800 text-gray-100 rounded-full
     ul
       @apply flex gap-10
       .link_element
@@ -26,23 +28,54 @@
       .link_element:hover::after
         width: 100%
   .logo
-    @apply uppercase text-2xl font-medium text-center text-cyan-600
+    @apply justify-self-start uppercase text-2xl font-medium text-center text-cyan-600
 
 .user_block
-  @apply inline-block items-center relative
+  @apply justify-self-end flex inline-block items-center relative transition-all
 
   .user_wrapper
-    @apply flex gap-4 items-center relative
+    @apply grid grid-cols-2 grid-rows-1 gap-4 relative overflow-hidden py-1
+    grid-template-columns: auto 100px
+    .user_photo
+      @apply max-h-10 rounded-full z-10
+      grid-column: 1 / 2
+    .username
+      @apply transition-all absolute left-0 w-full text-center
+      grid-column: 2 / 3
+      align-self: center
+    .button_wrapper
+      @apply transition-all absolute -right-40 p-1
+      grid-column: 2 / 3
+      align-self: center
+.user_wrapper:hover .username
+  @apply absolute -left-40 opacity-0
+.user_wrapper:hover .button_wrapper
+  @apply absolute right-0
 
-.user_photo
-  @apply max-h-10 rounded-full
+.basket
+  @apply mr-8 cursor-pointer text-xl relative
+  .count
+    @apply absolute -right-2 top-0
+    font-size: 12px
 
 .drop_menu
-  @apply px-2 py-5 bg-gray-300 border rounded absolute z-10 shadow-md text-center
+  @apply px-2 py-5 bg-slate-800 text-gray-200 border rounded-xl absolute z-10 shadow-md shadow-gray-500 right-0 top-14 font-light w-full
   display: none
-  min-width: 150px
-  p
-    @apply text-cyan-700 text-left mb-2
+  min-width: 250px
+  font-size: 12px
+  .close_button
+    @apply absolute -top-1 -right-1 cursor-pointer bg-gray-100 rounded text-slate-800
+    font-size: 14px
+    &:hover
+      @apply bg-red-300
 
-.user_block:hover .drop_menu
+  .cart_item
+    @apply p-1 mb-2 border-b flex justify-between gap-x-6 items-center
+    .delete_product
+      @apply italic text-gray-300 cursor-pointer hover:text-red-400
+
+  .checkout_button
+    @apply text-center mt-5
+
+.cart_active
   display: block
