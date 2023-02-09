@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { NavLink } from 'react-router-dom'
 import { SlBasket, SlBasketLoaded } from 'react-icons/sl'
@@ -6,7 +6,7 @@ import { MdOutlineClose } from 'react-icons/md'
 
 import { logout } from '../store/authSlice'
 import CustomBtn from './CustomBtn/CustomBtn'
-import { IProduct, ProductsInCart } from '../types/Product'
+import { ProductsInCart } from '../types/Product'
 import styles from './Header.module.sass'
 import { changeQuantity, removeFromCart } from '../store/productsSlice'
 import { useLazyLoadProductQuery } from '../store/queryApi'
@@ -19,29 +19,17 @@ interface Props {
 
 const Header = ({ setVisible }: Props) => {
 
-  const [loadProduct, {data}] = useLazyLoadProductQuery()
   const { username, isAuth } = useAppSelector(state => state.main)
   const cart = useAppSelector(state => state.products.productsInCart)
-  const products = useAppSelector(state => state.products.products)
   const dispatch = useAppDispatch()
   const [cartVisible, setCartVisible] = useState(false)
 
   const minusHandler = (cardItem: ProductsInCart) => {
     if (cardItem.quantity === 1) {
-      dispatch(removeFromCart(cardItem.productId))
+      dispatch(removeFromCart(cardItem.product.id))
     }
-    dispatch(changeQuantity({ productId: cardItem.productId, quantity: cardItem.quantity - 1 }))
+    dispatch(changeQuantity({ product: cardItem.product, quantity: cardItem.quantity - 1 }))
   }
-
-  // function getInd(products: IProduct[], cardItemId: number) {
-  //   const index = products.find((el, index) => {
-  //     if (el.id === cardItemId) return index
-  //   })
-  //   return index
-  // }
-  //
-  // const aboba = getInd(products, cardItemId)
-
 
   return (
     <header className={styles.container}>
@@ -78,29 +66,33 @@ const Header = ({ setVisible }: Props) => {
               <>
                 <ul>
                   {cart.map((cardItem: ProductsInCart) => (
-                    <li className={styles.cart_item} key={cardItem.productId}>
+                    <li className={styles.cart_item} key={cardItem.product.id}>
 
-                      <div className={styles.buttons_wrapper}>
-                        <span className={styles.changeQuantity} onClick={() => minusHandler(cardItem)}><AiOutlineMinusCircle /></span>
-                        <span className={styles.quantity}>{cardItem.quantity}</span>
-                        <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({
-                          productId: cardItem.productId,
-                          quantity: cardItem.quantity + 1
-                        }))}><AiOutlinePlusCircle /></span>
+                      <div>
+                        <div className={styles.buttons_wrapper}>
+                        <span className={styles.changeQuantity}
+                              onClick={() => minusHandler(cardItem)}><AiOutlineMinusCircle /></span>
+                          <span className={styles.quantity}>{cardItem.quantity}</span>
+                          <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({
+                            product: cardItem.product,
+                            quantity: cardItem.quantity + 1
+                          }))}><AiOutlinePlusCircle /></span>
+                        </div>
+                        <div className={styles.cost}>
+                          {+cardItem.product.price * cardItem.quantity} $
+                        </div>
                       </div>
-
-                        {/*<NavLink to='/product/id'>{products[cardItem.productId]?.title}</NavLink>*/}
-                        <NavLink className={styles.item_link} to='/product/id'>{products[products.findIndex(el => el.id === cardItem.productId)]?.title}</NavLink>
-
+                      <NavLink className={styles.item_link} to='/product/id'>{cardItem.product.title}</NavLink>
                       <span
                         className={styles.delete_product}
-                        onClick={() => dispatch(removeFromCart(cardItem.productId))}
+                        onClick={() => dispatch(removeFromCart(cardItem.product.id))}
                       >delete</span>
                     </li>
                   ))}
                 </ul>
-                <div className={styles.checkout_button}>
-                  <CustomBtn text='Checkout' />
+                <div className={styles.checkout_block}>
+                  <span>TOTAL: {cart.reduce((total, el) => (total + el.quantity * +el.product.price), 0)} $</span>
+                  <CustomBtn text='Checkout' classname={styles.button_class}/>
                 </div>
               </>
             ) : <p>Your cart is empty ???!! Why</p>

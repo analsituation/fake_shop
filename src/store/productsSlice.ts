@@ -32,16 +32,16 @@ export const productSlice = createSlice({
       state.filteredProducts = state.products.filter(el =>
         action.payload.includes(el.category))
     },
-    addToCart: (state, action: PayloadAction<number>) => {
-      state.productsInCart.push({ productId: action.payload, quantity: 1 })
+    addToCart: (state, action: PayloadAction<IProduct>) => {
+      state.productsInCart.push({ product: action.payload, quantity: 1 })
       localStorage.setItem('productCart', JSON.stringify(state.productsInCart))
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
-      state.productsInCart = state.productsInCart.filter(el => el.productId !== action.payload)
+      state.productsInCart = state.productsInCart.filter(el => el.product.id !== action.payload)
       localStorage.setItem('productCart', JSON.stringify(state.productsInCart))
     },
     changeQuantity: (state, action: PayloadAction<ProductsInCart>) => {
-      const index = state.productsInCart.findIndex(el => el.productId === action.payload.productId)
+      const index = state.productsInCart.findIndex(el => el.product.id === action.payload.product.id)
       state.productsInCart[index].quantity = action.payload.quantity
       localStorage.setItem('productCart', JSON.stringify(state.productsInCart))
     }

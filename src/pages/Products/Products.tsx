@@ -6,7 +6,7 @@ import {
   useLoadCategoriesQuery,
   useLoadPartProductsQuery
 } from '../../store/queryApi'
-import { IProduct, ProductsInCart } from '../../types/Product'
+import { IProduct } from '../../types/Product'
 import { filterProducts, setProducts } from '../../store/productsSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
@@ -55,11 +55,6 @@ const Products = () => {
     }
   }
 
-  const getQuantity = (productsCart: ProductsInCart[], product: IProduct) => {
-    const index = productsCart.findIndex((el, index) => el.productId === product.id)
-    return productsCart[index]?.quantity !== -1 ? productsCart[index]?.quantity : 0
-  }
-
   useEffect(() => {
     dispatch(filterProducts(activeCategories))
     conditionalRender()
@@ -72,8 +67,7 @@ const Products = () => {
           <ProductCard
             key={product.id}
             product={product}
-            quantity={productsCart.find(el => el.productId === product.id)?.quantity}
-            // quantity={getQuantity(productsCart, product)}
+            quantity={productsCart.find(el => el.product.id === product.id)?.quantity}
           />))
       )
     } else if (activeCategories.length && filteredProducts.length) {
@@ -82,8 +76,7 @@ const Products = () => {
           <ProductCard
             key={product.id}
             product={product}
-            quantity={productsCart.find(el => el.productId === product.id)?.quantity}
-            // quantity={getQuantity(productsCart, product)}
+            quantity={productsCart.find(el => el.product.id === product.id)?.quantity}
           />))
       )
     } else if (activeCategories.length && filteredProducts.length === 0) {

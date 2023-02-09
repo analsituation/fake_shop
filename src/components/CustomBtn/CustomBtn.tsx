@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './CustomBtn.module.sass'
-import { IProduct } from '../../types/Product'
 
 type Props = {
   text: string
   onClick?: () => void
+  classname?: string
 };
 
-export function CustomBtn({text, onClick}: Props) {
+export function CustomBtn({text, onClick, classname}: Props) {
   return (
-    <button className={styles.custom_button} onClick={onClick}>
+    <button className={[styles.custom_button, classname].join(' ')} onClick={onClick}>
       {text}
     </button>
   )

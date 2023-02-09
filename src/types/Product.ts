@@ -5,9 +5,15 @@ export interface IProduct {
   category: string
   description: string
   image: string
+  rating: Rating
+}
+
+interface Rating {
+  count: number
+  rate: string
 }
 
 export interface ProductsInCart {
-  productId: number
+  product: IProduct
   quantity: number
 }

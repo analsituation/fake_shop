@@ -5,8 +5,14 @@
   .title
     @apply font-medium mb-4 flex items-center
     min-height: 50px
-  .category
-    @apply bg-slate-300 px-3 py-1 rounded-2xl w-fit
+  .info_clock
+    @apply flex justify-between
+    .category
+      @apply bg-slate-300 px-3 py-1 rounded-2xl w-fit
+    .rating
+      @apply mr-3 flex items-center gap-x-2
+      svg
+        @apply mt-0.5
   .image
     @apply mt-8 h-96 flex items-center justify-center
     img

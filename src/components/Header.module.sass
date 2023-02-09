@@ -65,7 +65,7 @@
   font-size: 12px
   .close_button
     @apply absolute -top-1 -right-1 cursor-pointer bg-gray-100 rounded text-slate-800
-    font-size: 14px
+    font-size: 15px
     &:hover
       @apply bg-red-300
 
@@ -82,13 +82,18 @@
       .quantity
         @apply mx-2
       .changeQuantity
-        @apply cursor-pointer inline-block
+        @apply cursor-pointer inline-block hover:text-cyan-500 transition-colors
         font-size: 13px
+    .cost
+      @apply text-center mt-1
     .item_link
-      text-align: left
+      @apply text-left hover:text-cyan-500 transition-colors
 
-  .checkout_button
-    @apply text-center mt-5
+  .checkout_block
+    @apply flex justify-between items-center mt-5
 
 .cart_active
   display: block
+
+.button_class
+  @apply hover:shadow-slate-700 hover:shadow-md

@@ -4,7 +4,7 @@ import { IProduct } from '../../types/Product'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
 import { addToCart, changeQuantity, removeFromCart } from '../../store/productsSlice'
 import { useAppDispatch } from '../../hooks/redux'
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
+import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiOutlineStar } from 'react-icons/ai'
 
 interface Props {
   product: IProduct
@@ -18,9 +18,10 @@ const ProductCard = ({ product, quantity }: Props) => {
   const minusHandler = () => {
     if (quantity === 1) {
       dispatch(removeFromCart(product.id))
+      return
     }
     if (quantity) {
-      dispatch(changeQuantity({ productId: product.id, quantity: quantity - 1 }))
+      dispatch(changeQuantity({ product: product, quantity: quantity - 1 }))
     }
   }
 
@@ -29,8 +30,9 @@ const ProductCard = ({ product, quantity }: Props) => {
       <div className={styles.title}>
         {product.title}
       </div>
-      <span className={styles.category}>
-        {product.category}
+      <span className={styles.info_clock}>
+        <span className={styles.category}>{product.category}</span>
+        <span className={styles.rating}>{product.rating.rate}<AiOutlineStar /></span>
       </span>
       <div className={styles.image}>
         <img src={product.image} alt={product.title} />
@@ -48,11 +50,11 @@ const ProductCard = ({ product, quantity }: Props) => {
       </div>
       <div className={styles.buy_block_wrapper}>
         <div className={styles.buy_block}>
-          {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product.id))} /> : (
+          {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product))} /> : (
             <div className={styles.buttons_wrapper}>
               <span className={styles.changeQuantity} onClick={minusHandler}><AiOutlineMinusCircle /></span>
               <span className={styles.quantity}>{quantity}</span>
-              <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({ productId: product.id, quantity: quantity + 1 }))}><AiOutlinePlusCircle /></span>
+              <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({ product: product, quantity: quantity + 1 }))}><AiOutlinePlusCircle /></span>
             </div>
           )
           }
