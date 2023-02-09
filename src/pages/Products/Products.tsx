@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Products.module.sass'
 import ProductCard from './ProductCard'
 import {
@@ -6,7 +6,7 @@ import {
   useLoadCategoriesQuery,
   useLoadPartProductsQuery
 } from '../../store/queryApi'
-import { IProduct } from '../../types/Product'
+import { IProduct, ProductsInCart } from '../../types/Product'
 import { filterProducts, setProducts } from '../../store/productsSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
@@ -18,7 +18,7 @@ const Products = () => {
 
   const dispatch = useAppDispatch()
   const products = useAppSelector(state => state.products.products)
-  const productsCart = useAppSelector(state => state.products.prodsInCart)
+  const productsCart = useAppSelector(state => state.products.productsInCart)
   const filteredProducts = useAppSelector(state => state.products.filteredProducts)
   const { data, isLoading } = useLoadPartProductsQuery(6)
   const { data: categories } = useLoadCategoriesQuery(null)
@@ -55,6 +55,11 @@ const Products = () => {
     }
   }
 
+  const getQuantity = (productsCart: ProductsInCart[], product: IProduct) => {
+    const index = productsCart.findIndex((el, index) => el.productId === product.id)
+    return productsCart[index]?.quantity !== -1 ? productsCart[index]?.quantity : 0
+  }
+
   useEffect(() => {
     dispatch(filterProducts(activeCategories))
     conditionalRender()
@@ -68,6 +73,7 @@ const Products = () => {
             key={product.id}
             product={product}
             quantity={productsCart.find(el => el.productId === product.id)?.quantity}
+            // quantity={getQuantity(productsCart, product)}
           />))
       )
     } else if (activeCategories.length && filteredProducts.length) {
@@ -76,7 +82,8 @@ const Products = () => {
           <ProductCard
             key={product.id}
             product={product}
-            quantity={productsCart.find(el => el.productId === product.id) ? productsCart[product.id].quantity : 0}
+            quantity={productsCart.find(el => el.productId === product.id)?.quantity}
+            // quantity={getQuantity(productsCart, product)}
           />))
       )
     } else if (activeCategories.length && filteredProducts.length === 0) {

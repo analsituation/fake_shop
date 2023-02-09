@@ -70,9 +70,22 @@
       @apply bg-red-300
 
   .cart_item
-    @apply p-1 mb-2 border-b flex justify-between gap-x-6 items-center
+    @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
+    grid-template-columns: 1fr auto 1fr
     .delete_product
       @apply italic text-gray-300 cursor-pointer hover:text-red-400
+      grid-column: 3 / 4
+      align-self: center
+      justify-self: end
+    .buttons_wrapper
+      @apply flex items-center
+      .quantity
+        @apply mx-2
+      .changeQuantity
+        @apply cursor-pointer inline-block
+        font-size: 13px
+    .item_link
+      text-align: left
 
   .checkout_button
     @apply text-center mt-5

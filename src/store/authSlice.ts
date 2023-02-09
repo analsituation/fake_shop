@@ -1,24 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from './store'
 import { IAuthUserInfo, IUser } from '../types/User'
 
 
 const data: any = localStorage.getItem('AuthUserInfo')
-  const parse: IAuthUserInfo = JSON.parse(data)
+const parse: IAuthUserInfo = JSON.parse(data)
 
 const initialState: IAuthUserInfo = {
-    isAuth: parse.isAuth,
-    username: parse.username,
-    password: parse.password,
-    token: parse.token
+  isAuth: parse ? parse.isAuth : false,
+  username: parse ? parse.username: '',
+  password: parse ? parse.password: '',
+  token: parse ? parse.token : ''
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{username: string, password: string, token: string}>): IAuthUserInfo => {
+    login: (state, action: PayloadAction<{ username: string, password: string, token: string }>): IAuthUserInfo => {
       const AuthUserInfo = {
         isAuth: true,
         username: action.payload.username,

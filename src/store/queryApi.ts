@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const userApi = createApi({
+export const queryApi = createApi({
   reducerPath: 'api/user',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://fakestoreapi.com/'
@@ -19,6 +19,11 @@ export const userApi = createApi({
     loadCategories: build.query({
       query: () => ({
         url: `products/categories`
+      })
+    }),
+    loadProduct: build.query({
+      query: (id: number) => ({
+        url: `products/${id}`
       })
     }),
     login: build.mutation({
@@ -42,6 +47,7 @@ export const {
   useLoginMutation,
   useLoadPartProductsQuery,
   useLazyLoadAllProductsQuery,
-  useLoadCategoriesQuery
-} = userApi
+  useLoadCategoriesQuery,
+  useLazyLoadProductQuery
+} = queryApi
 

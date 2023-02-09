@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { NavLink } from 'react-router-dom'
 import { SlBasket, SlBasketLoaded } from 'react-icons/sl'
@@ -9,6 +9,8 @@ import CustomBtn from './CustomBtn/CustomBtn'
 import { IProduct, ProductsInCart } from '../types/Product'
 import styles from './Header.module.sass'
 import { changeQuantity, removeFromCart } from '../store/productsSlice'
+import { useLazyLoadProductQuery } from '../store/queryApi'
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 
 
 interface Props {
@@ -17,8 +19,9 @@ interface Props {
 
 const Header = ({ setVisible }: Props) => {
 
+  const [loadProduct, {data}] = useLazyLoadProductQuery()
   const { username, isAuth } = useAppSelector(state => state.main)
-  const cart = useAppSelector(state => state.products.prodsInCart)
+  const cart = useAppSelector(state => state.products.productsInCart)
   const products = useAppSelector(state => state.products.products)
   const dispatch = useAppDispatch()
   const [cartVisible, setCartVisible] = useState(false)
@@ -29,6 +32,16 @@ const Header = ({ setVisible }: Props) => {
     }
     dispatch(changeQuantity({ productId: cardItem.productId, quantity: cardItem.quantity - 1 }))
   }
+
+  // function getInd(products: IProduct[], cardItemId: number) {
+  //   const index = products.find((el, index) => {
+  //     if (el.id === cardItemId) return index
+  //   })
+  //   return index
+  // }
+  //
+  // const aboba = getInd(products, cardItemId)
+
 
   return (
     <header className={styles.container}>
@@ -67,14 +80,18 @@ const Header = ({ setVisible }: Props) => {
                   {cart.map((cardItem: ProductsInCart) => (
                     <li className={styles.cart_item} key={cardItem.productId}>
 
-                      <span onClick={() => minusHandler(cardItem)}>-</span>
-                      {cardItem.quantity}
-                      <span onClick={() => dispatch(changeQuantity({
-                        productId: cardItem.productId,
-                        quantity: cardItem.quantity + 1
-                      }))}>+</span>
+                      <div className={styles.buttons_wrapper}>
+                        <span className={styles.changeQuantity} onClick={() => minusHandler(cardItem)}><AiOutlineMinusCircle /></span>
+                        <span className={styles.quantity}>{cardItem.quantity}</span>
+                        <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({
+                          productId: cardItem.productId,
+                          quantity: cardItem.quantity + 1
+                        }))}><AiOutlinePlusCircle /></span>
+                      </div>
 
-                      <NavLink to='/product/id'>{products[cardItem.productId].title}</NavLink>
+                        {/*<NavLink to='/product/id'>{products[cardItem.productId]?.title}</NavLink>*/}
+                        <NavLink className={styles.item_link} to='/product/id'>{products[products.findIndex(el => el.id === cardItem.productId)]?.title}</NavLink>
+
                       <span
                         className={styles.delete_product}
                         onClick={() => dispatch(removeFromCart(cardItem.productId))}

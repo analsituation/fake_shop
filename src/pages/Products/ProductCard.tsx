@@ -3,7 +3,8 @@ import styles from './ProductCard.module.sass'
 import { IProduct } from '../../types/Product'
 import CustomBtn from '../../components/CustomBtn/CustomBtn'
 import { addToCart, changeQuantity, removeFromCart } from '../../store/productsSlice'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { useAppDispatch } from '../../hooks/redux'
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 
 interface Props {
   product: IProduct
@@ -48,10 +49,10 @@ const ProductCard = ({ product, quantity }: Props) => {
       <div className={styles.buy_block_wrapper}>
         <div className={styles.buy_block}>
           {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product.id))} /> : (
-            <div>
-              <span onClick={minusHandler}>-</span>
-              {quantity}
-              <span onClick={() => dispatch(changeQuantity({ productId: product.id, quantity: quantity + 1 }))}>+</span>
+            <div className={styles.buttons_wrapper}>
+              <span className={styles.changeQuantity} onClick={minusHandler}><AiOutlineMinusCircle /></span>
+              <span className={styles.quantity}>{quantity}</span>
+              <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({ productId: product.id, quantity: quantity + 1 }))}><AiOutlinePlusCircle /></span>
             </div>
           )
           }

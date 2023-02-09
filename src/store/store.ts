@@ -1,16 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 import mainSlice from './authSlice'
 import productSlice from './productsSlice'
-import { userApi } from './queryApi'
+import { queryApi } from './queryApi'
 
 export const store = configureStore({
   reducer: {
-    [userApi.reducerPath]: userApi.reducer,
+    [queryApi.reducerPath]: queryApi.reducer,
     main: mainSlice,
     products: productSlice
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userApi.middleware),
+    getDefaultMiddleware().concat(queryApi.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

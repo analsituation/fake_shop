@@ -1,13 +1,14 @@
 .card_item
-  @apply text-cyan-700 p-4 border rounded-3xl shadow-xl bg-white relative overflow-hidden
+  @apply text-cyan-700 p-4 border rounded-3xl shadow-xl bg-white relative overflow-hidden flex
+  flex-direction: column
 
   .title
     @apply font-medium mb-4 flex items-center
     min-height: 50px
   .category
-    @apply bg-slate-300 px-3 py-1 rounded-2xl
+    @apply bg-slate-300 px-3 py-1 rounded-2xl w-fit
   .image
-    @apply mt-8 h-96
+    @apply mt-8 h-96 flex items-center justify-center
     img
       max-width: 100%
       max-height: 100%
@@ -21,7 +22,7 @@
     .long_desc_content
       @apply block absolute bg-slate-500 text-gray-300 w-full h-fit p-4 pb-10 left-0 right-0
       bottom: -100%
-      transition: all 0.6s ease-in-out
+      transition: all 0.4s ease-in-out
       &:hover
         @apply bottom-0
 
@@ -29,8 +30,17 @@
       @apply bottom-0
 
   .buy_block_wrapper
+    margin-top: auto
+    margin-bottom: 10px
     .buy_block
       @apply mt-4 flex items-center gap-x-6 min-h-full
+      .buttons_wrapper
+        @apply flex items-center
+        .quantity
+          @apply mx-5
+        .changeQuantity
+          @apply text-cyan-700 inline-block cursor-pointer
+
 
 
 
