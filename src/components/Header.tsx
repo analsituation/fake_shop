@@ -9,7 +9,6 @@ import CustomBtn from './CustomBtn/CustomBtn'
 import { ProductsInCart } from '../types/Product'
 import styles from './Header.module.sass'
 import { changeQuantity, removeFromCart } from '../store/productsSlice'
-import { useLazyLoadProductQuery } from '../store/queryApi'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 
 
@@ -82,7 +81,7 @@ const Header = ({ setVisible }: Props) => {
                           {+cardItem.product.price * cardItem.quantity} $
                         </div>
                       </div>
-                      <NavLink className={styles.item_link} to='/product/id'>{cardItem.product.title}</NavLink>
+                      <NavLink className={styles.item_link} to={`/product/${cardItem.product.id}`}>{cardItem.product.title}</NavLink>
                       <span
                         className={styles.delete_product}
                         onClick={() => dispatch(removeFromCart(cardItem.product.id))}
@@ -91,7 +90,7 @@ const Header = ({ setVisible }: Props) => {
                   ))}
                 </ul>
                 <div className={styles.checkout_block}>
-                  <span>TOTAL: {cart.reduce((total, el) => (total + el.quantity * +el.product.price), 0)} $</span>
+                  <span>TOTAL: {(cart.reduce((total, el) => (total + el.quantity * +el.product.price), 0)).toFixed(2)} $</span>
                   <CustomBtn text='Checkout' classname={styles.button_class}/>
                 </div>
               </>

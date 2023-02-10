@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IProduct } from '../types/Product'
 
 export const queryApi = createApi({
   reducerPath: 'api/user',
@@ -26,6 +27,11 @@ export const queryApi = createApi({
         url: `products/${id}`
       })
     }),
+    loadCategory: build.query({
+      query: (category: string) => ({
+        url: `products/category/${category}`
+      })
+    }),
     login: build.mutation({
       query: ({ username, password }) => ({
         url: 'auth/login',
@@ -48,6 +54,7 @@ export const {
   useLoadPartProductsQuery,
   useLazyLoadAllProductsQuery,
   useLoadCategoriesQuery,
-  useLazyLoadProductQuery
+  useLoadProductQuery,
+  useLazyLoadCategoryQuery
 } = queryApi
 

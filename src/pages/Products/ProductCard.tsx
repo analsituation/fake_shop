@@ -5,13 +5,17 @@ import CustomBtn from '../../components/CustomBtn/CustomBtn'
 import { addToCart, changeQuantity, removeFromCart } from '../../store/productsSlice'
 import { useAppDispatch } from '../../hooks/redux'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiOutlineStar } from 'react-icons/ai'
+import { NavLink } from 'react-router-dom'
 
 interface Props {
   product: IProduct
   quantity?: number
+  isCategory?: boolean
+  isDescription?: boolean
+  isBuy?: boolean
 }
 
-const ProductCard = ({ product, quantity }: Props) => {
+const ProductCard = ({ product, quantity, isCategory = true, isDescription = true, isBuy = true }: Props) => {
 
   const dispatch = useAppDispatch()
 
@@ -28,42 +32,49 @@ const ProductCard = ({ product, quantity }: Props) => {
   return (
     <div className={styles.card_item}>
       <div className={styles.title}>
-        {product.title}
+        <NavLink className={styles.item_link} to={`/product/${product.id}`}>{product.title}</NavLink>
       </div>
-      <span className={styles.info_clock}>
+      {isCategory &&
+        <span className={styles.info_clock}>
         <span className={styles.category}>{product.category}</span>
         <span className={styles.rating}>{product.rating.rate}<AiOutlineStar /></span>
       </span>
+      }
       <div className={styles.image}>
         <img src={product.image} alt={product.title} />
       </div>
-      <div className={styles.description}>
-        {product.description.length > 150 ?
-          (
-            <>
-              <span className={styles.part_of_desc}>{product.description.slice(0, 130)}</span><span
-              className={styles.show_desc}> ...read more</span>
-              <span className={styles.long_desc_content}>{product.description}</span>
-            </>
-          ) : (product.description)
-        }
-      </div>
-      <div className={styles.buy_block_wrapper}>
-        <div className={styles.buy_block}>
-          {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product))} /> : (
-            <div className={styles.buttons_wrapper}>
-              <span className={styles.changeQuantity} onClick={minusHandler}><AiOutlineMinusCircle /></span>
-              <span className={styles.quantity}>{quantity}</span>
-              <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({ product: product, quantity: quantity + 1 }))}><AiOutlinePlusCircle /></span>
-            </div>
-          )
+      {isDescription &&
+        <div className={styles.description}>
+          {product.description.length > 150 ?
+            (
+              <>
+                <span className={styles.part_of_desc}>{product.description.slice(0, 130)}</span><span
+                className={styles.show_desc}> ...read more</span>
+                <span className={styles.long_desc_content}>{product.description}</span>
+              </>
+            ) : (product.description)
           }
-
-          <span className={styles.price}>
-          {product.price}$
-        </span>
         </div>
-      </div>
+      }
+      {isBuy &&
+        <div className={styles.buy_block_wrapper}>
+          <div className={styles.buy_block}>
+            {!quantity ? <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product))} /> : (
+              <div className={styles.buttons_wrapper}>
+                <span className={styles.changeQuantity} onClick={minusHandler}><AiOutlineMinusCircle /></span>
+                <span className={styles.quantity}>{quantity}</span>
+                <span className={styles.changeQuantity} onClick={() => dispatch(changeQuantity({
+                  product: product,
+                  quantity: quantity + 1
+                }))}><AiOutlinePlusCircle /></span>
+              </div>
+            )
+            }
+            <span className={styles.price}>
+            {product.price}$
+          </span>
+          </div>
+        </div>}
     </div>
   )
 }
