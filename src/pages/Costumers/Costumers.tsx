@@ -1,10 +1,10 @@
 import React from 'react'
-import { redirect } from 'react-router-dom'
 
 const Costumers = () => {
   return (
-    <div>
-      Costumers
+    <div className="text-2xl">
+      Unfortunately, nothing here..<br/>
+      All functionality is concentrated in products page
     </div>
   )
 }

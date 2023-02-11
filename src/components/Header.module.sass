@@ -55,6 +55,14 @@
   .count
     @apply absolute -right-2 top-0
     font-size: 12px
+  .tooltip
+    @apply w-32 py-2 px-3 bg-slate-800 text-white absolute rounded-md opacity-75 text-center text-sm top-8 -left-12
+    visibility: hidden
+    z-index: 1
+  .tooltip_active
+    visibility: visible
+    transition: all 0.8s ease
+
 
 .drop_menu
   @apply px-2 py-5 bg-slate-800 text-gray-200 border rounded-xl absolute z-10 shadow-md shadow-gray-500 right-0 top-14 font-light w-full

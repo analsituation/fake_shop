@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { NavLink } from 'react-router-dom'
 import { SlBasket, SlBasketLoaded } from 'react-icons/sl'
@@ -22,6 +22,13 @@ const Header = ({ setVisible }: Props) => {
   const cart = useAppSelector(state => state.products.productsInCart)
   const dispatch = useAppDispatch()
   const [cartVisible, setCartVisible] = useState(false)
+  const [tooltip, setTooltip] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTooltip(false)
+    }, 1000)
+  }, [tooltip])
 
   const minusHandler = (cardItem: ProductsInCart) => {
     if (cardItem.quantity === 1) {
@@ -46,15 +53,21 @@ const Header = ({ setVisible }: Props) => {
       </nav>
 
       <div className={styles.user_block}>
-        <div className={styles.basket} onClick={() => setCartVisible(!cartVisible)}>
-          {cart.length ? (
+        <div className={styles.basket} onClick={() => {
+          isAuth ?
+          setCartVisible(!cartVisible) : setTooltip(true)
+        }}>
+          {cart.length && isAuth ? (
             <>
               <SlBasketLoaded />
               <span className={styles.count}>
                 {cart.length}
               </span>
             </>
-          ) : <SlBasket />}
+          ) : <SlBasket /> }
+          <span className={tooltip ? [styles.tooltip, styles.tooltip_active].join(' ') : styles.tooltip}>
+            Login please
+          </span>
         </div>
         <div
           className={cartVisible ? [styles.drop_menu, styles.cart_active].join(' ') : styles.drop_menu}
