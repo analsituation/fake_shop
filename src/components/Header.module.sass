@@ -6,12 +6,10 @@
   .nav
     @apply justify-self-center py-2 px-10 bg-slate-800 text-gray-100 rounded-full
     ul
-      @apply flex gap-10
+      @apply flex items-center gap-10
       .link_element
-        @apply block font-light uppercase
+        @apply block font-light uppercase relative text-[12px] text-center
         letter-spacing: 2px
-        font-size: 12px
-        position: relative
         transition: all 0.4s ease
       .link_element::after
         content: ""

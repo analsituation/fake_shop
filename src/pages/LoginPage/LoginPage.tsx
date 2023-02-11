@@ -3,32 +3,41 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 import styles from './LoginPage.module.sass'
 import { useAppSelector } from '../../hooks/redux'
 import { Navigate } from 'react-router-dom'
+import { useGetUsersQuery } from '../../store/queryApi'
+import { IUser } from '../../types/User'
+import Spinner from '../../components/LoadingSpinner/Spinner'
 
 const LoginPage = () => {
 
   const isAuth = useAppSelector(state => state.main.isAuth)
+  const {data, isLoading } = useGetUsersQuery(null)
 
-  if (isAuth) return <Navigate to="/"/>
+   if (isAuth) return <Navigate to='/' />
 
   return (
     <div className={styles.login_block}>
-      <h3 className="text-2xl">Login page</h3>
-      <div className="mb-2">
-        for login use one of these pairs of username and password from
+      <h3 className={styles.page_title}>Login page</h3>
+      <div className={styles.page_info}>
+        For login use one of these pairs of username and password from
         <a href='https://fakestoreapi.com/'>fakestoreapi.com</a>
       </div>
-      <div>username : johnd , password : m38rmF$</div>
-      <div>username : mor_2314 , password : 83r5^_</div>
-      <div>username : kevinryan , password : kev02937@</div>
-      <div>username : donero , password : ewedon</div>
-      <div>username : derek , password : jklg*_56</div>
-      <div>username : david_r , password : 3478*#54</div>
-      <div>username : snyder , password : f238&@*$</div>
-      <div>username : hopkins , password : William56$hj</div>
-      <div>username : kate_h , password : kfejk@*_</div>
-      <div>username : johnd , password : m38rmF$</div>
-      <div className="mb-5">username : jimmie_k , password : klein*#%*</div>
-      <LoginForm />
+      {isLoading && <div className="text-center mt-10"><Spinner /></div>}
+      {data &&
+        <div className={styles.inner_block}>
+          <div className={styles.usersdata_wrapper}>
+            <div className={styles.titles}>
+              <span>Usernames</span><span>Passwords</span>
+            </div>
+            {data.map((user: IUser) => (
+              <div className={styles.userdata_items} key={user.username}>
+                <span>{user.username}</span><span>{user.password}</span>
+              </div>
+            ))}
+          </div>
+          <div className={styles.form_wrapper}>
+            <LoginForm />
+          </div>
+        </div>}
     </div>
   )
 }

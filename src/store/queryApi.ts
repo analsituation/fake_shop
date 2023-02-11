@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IProduct } from '../types/Product'
 
 export const queryApi = createApi({
   reducerPath: 'api/user',
@@ -45,6 +44,11 @@ export const queryApi = createApi({
           password: password
         })
       })
+    }),
+    getUsers: build.query({
+      query: () => ({
+        url: `users`
+      })
     })
   })
 })
@@ -55,6 +59,7 @@ export const {
   useLazyLoadAllProductsQuery,
   useLoadCategoriesQuery,
   useLoadProductQuery,
-  useLazyLoadCategoryQuery
+  useLazyLoadCategoryQuery,
+  useGetUsersQuery
 } = queryApi
 

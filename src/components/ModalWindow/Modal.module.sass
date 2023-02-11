@@ -1,15 +1,28 @@
 .overlay
   @apply fixed left-0 right-0 top-0 bottom-0 bg-slate-900 bg-opacity-80 z-20 flex justify-center items-center
-  //display: none
 
 .modal_window
-  @apply px-5 pt-10 pb-5 rounded-3xl bg-gray-200 relative
-  min-width: 400px
+  @apply p-5 rounded-3xl bg-gray-200 relative
+  width: 350px
+  .form_title
+    @apply text-xl text-cyan-700 font-medium
+  .form_text
+    @apply mt-3 mb-3
+    a
+      @apply text-cyan-700
+      animation: blink 1.3s infinite
+@keyframes blink
+  0%
+    opacity: 1
+  50%
+    opacity: 0.6
+  100%
+    opacity: 1
 
 .overlay.active
   @apply flex justify-center items-center
 
 .close_button
-  @apply absolute top-2 right-5 px-2 border border-slate-900 rounded-full cursor-pointer bg-red-500 text-white
+  @apply absolute top-3 right-4 cursor-pointer hover:text-red-600
 
 

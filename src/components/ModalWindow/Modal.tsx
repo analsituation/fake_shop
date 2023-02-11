@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { FC, PropsWithChildren } from 'react'
+import { MdOutlineClose } from 'react-icons/md'
 import styles from './Modal.module.sass'
 
-interface Props {
-  children: JSX.Element
-  setModal: (arg: boolean) => void
-}
-
-export function Modal({children, setModal}: Props) {
+const Modal: FC<PropsWithChildren<{formName: string, formDescription: string | JSX.Element, setModal: (arg: boolean) => void}>> =
+  ({formName, formDescription, setModal, children}) => {
 
   const closeModal = (e:  React.MouseEvent<HTMLSpanElement>) => {
     setModal(false)
@@ -15,7 +12,9 @@ export function Modal({children, setModal}: Props) {
   return (
     <div className={styles.overlay} onClick={closeModal}>
       <div className={styles.modal_window} onClick={e => e.stopPropagation()}>
-        <span className={styles.close_button} onClick={closeModal}>X</span>
+        <span className={styles.close_button} onClick={closeModal}><MdOutlineClose /></span>
+        <div className={styles.form_title}>{formName}</div>
+        <div className={styles.form_text}>{formDescription}</div>
         {children}
       </div>
     </div>

@@ -47,8 +47,10 @@ const LoginForm = () => {
         <button onClick={authorize} className={styles.btn}>
           Login
         </button>
-        {isLoading && <Spinner />}
       </form>
+      {isLoading &&
+        <div className={styles.loading_block}><Spinner /></div>
+      }
     </>
 
   )
