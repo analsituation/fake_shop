@@ -52,7 +52,6 @@ const LoginForm = () => {
         <div className={styles.loading_block}><Spinner /></div>
       }
     </>
-
   )
 }
 

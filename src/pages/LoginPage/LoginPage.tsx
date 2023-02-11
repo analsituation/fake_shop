@@ -19,7 +19,7 @@ const LoginPage = () => {
       <h3 className={styles.page_title}>Login page</h3>
       <div className={styles.page_info}>
         For login use one of these pairs of username and password from
-        <a href='https://fakestoreapi.com/'>fakestoreapi.com</a>
+        <a className="text-cyan-700" href='https://fakestoreapi.com/'> fakestoreapi.com</a>
       </div>
       {isLoading && <div className="text-center mt-10"><Spinner /></div>}
       {data &&
