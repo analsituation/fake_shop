@@ -1,10 +1,23 @@
 .product_sort
-  @apply rounded-2xl shadow-md bg-white flex h-8 overflow-hidden
+  @apply rounded-2xl shadow-md bg-white flex h-8 overflow-hidden w-fit
+  @media (max-width: 1024px)
+    @apply mt-6
+  @media (max-width: 602px)
+    @apply flex-col h-fit mt-0
+    grid-column: 1 / 2
+    grid-row: 1 / 2
+  @media (max-width: 482px)
+    @apply mt-4 w-full
+    grid-column: 1
+    grid-row: 2 / 3
+
   .category_item
     @apply text-slate-500 cursor-pointer transition-all hover:bg-slate-200 px-4 h-full flex items-center
     &:first-child
       @apply pl-8
     &:last-child
       @apply pr-8
+    @media (max-width: 602px)
+      @apply px-8 py-2
   .active
     @apply bg-slate-300 hover:bg-slate-300

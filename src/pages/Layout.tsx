@@ -9,7 +9,7 @@ import { useAppSelector } from '../hooks/redux'
 const Layout = () => {
 
   const [modal, setModal] = useState(false)
-  const isAuth = useAppSelector(state => state.main.isAuth)
+  const isAuth = useAppSelector(state => state.auth.isAuth)
   const location = useLocation()
 
   useEffect(() => {
@@ -21,8 +21,9 @@ const Layout = () => {
       <div className={styles.container}>
         {
           modal &&
-          <Modal formName="Log in form"
-                 formDescription={<div>Data for authorization is located on <NavLink to='/login'>/login</NavLink>. Check this out</div>}
+          <Modal formName='Log in form'
+                 formDescription={<div>Data for authorization is located on <NavLink to='/login'>/login</NavLink>. Check
+                   this out</div>}
                  setModal={setModal}>
             <LoginForm />
           </Modal>

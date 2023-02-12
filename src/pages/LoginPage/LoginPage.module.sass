@@ -6,11 +6,23 @@
     @apply mt-5 text-xl text-center
   .inner_block
     @apply grid grid-cols-2 mt-16
+    @media (max-width: 769px)
+      @apply flex flex-col-reverse
     .form_wrapper
       @apply mx-auto self-start
       width: 80%
+      @media (max-width: 902px)
+        width: 100%
+      @media (max-width: 769px)
+        width: 70%
+      @media (max-width: 586px)
+        width: 90%
 
 .titles
   @apply grid grid-cols-2 text-cyan-700 text-xl
+  @media (max-width: 769px)
+    @apply text-center mt-6
 .userdata_items
   @apply grid grid-cols-2
+  @media (max-width: 769px)
+    @apply text-center

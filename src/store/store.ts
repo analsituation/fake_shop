@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import mainSlice from './authSlice'
+import authSlice from './authSlice'
 import productSlice from './productsSlice'
 import { queryApi } from './queryApi'
 
 export const store = configureStore({
   reducer: {
     [queryApi.reducerPath]: queryApi.reducer,
-    main: mainSlice,
+    auth: authSlice,
     products: productSlice
   },
   middleware: (getDefaultMiddleware) =>

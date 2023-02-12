@@ -9,7 +9,7 @@ import Spinner from '../LoadingSpinner/Spinner'
 const LoginForm = () => {
 
   const dispatch = useAppDispatch()
-  const [loginData, setLoginData] = useState({ username: '', password: '', token: ''})
+  const [loginData, setLoginData] = useState({ username: '', password: '', token: '' })
   const [loginRequest, { isLoading }] = useLoginMutation()
   const [error, setError] = useState('')
   const navigate = useNavigate()
@@ -20,8 +20,8 @@ const LoginForm = () => {
       const data = await loginRequest(loginData).unwrap()
       if (data['token']) {
         dispatch(login({ ...loginData, token: data.token }))
-        setLoginData({ username: '', password: '', token: ''})
-        navigate('/', {replace: true})
+        setLoginData({ username: '', password: '', token: '' })
+        navigate('/', { replace: true })
       }
     } catch (e: any) {
       setError(e.data)

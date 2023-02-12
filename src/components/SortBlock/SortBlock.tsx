@@ -7,7 +7,7 @@ interface Props {
   setCategoryHandler: (e: React.MouseEvent<HTMLSpanElement>, el: string) => void
 }
 
-const SortBlock = ({categories, activeCategories, setCategoryHandler}: Props) => {
+const SortBlock = ({ categories, activeCategories, setCategoryHandler }: Props) => {
   return (
     <div className={styles.product_sort}>
       {categories && categories.map((el: string) => (

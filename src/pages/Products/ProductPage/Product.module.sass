@@ -1,23 +1,54 @@
 .product_block
   @apply grid grid-cols-6 grid-rows-1 gap-x-10
+  @media (max-width: 902px)
+    @apply grid-cols-5
+  @media (max-width: 769px)
+    @apply grid-cols-4 gap-x-5
+  @media (max-width: 702px)
+    @apply flex flex-col
   .product_image
     grid-column: 1 / 3
+    @media (max-width: 902px)
+      grid-column: 1 / 3
+    @media (max-width: 702px)
+      display: none
     .img_wrapper
       @apply border border-slate-400 rounded-xl shadow overflow-hidden
   .product_info
     @apply text-xl
     grid-column: 3 / 7
+    @media (max-width: 902px)
+      grid-column: 3 / 6
+    @media (max-width: 702px)
+      @apply text-base
+    .hidden_image
+      @apply mx-auto
+      max-width: 70%
+      display: none
+      .img_wrapper
+        @apply border border-slate-400 rounded-xl shadow overflow-hidden mt-6
+      @media (max-width: 702px)
+        display: block
+      @media (max-width: 480px)
+        max-width: 90%
+
     .product_title
       .rating
         @apply flex items-center gap-x-2 text-sm mt-2
       .title
         @apply text-2xl font-medium text-cyan-700
+        @media (max-width: 702px)
+          @apply text-xl
     .product_descr
       @apply mt-8 pr-10 font-light
+      @media (max-width: 902px)
+        @apply mt-6
       .description
         @apply block text-cyan-700 font-medium mb-2
   .buy_block
     @apply mt-8
+    @media (max-width: 902px)
+      @apply mt-6
     .price
       @apply block mb-3 text-cyan-700
     .buttons_wrapper

@@ -33,7 +33,6 @@ const Products = () => {
     }
   }, [data, newData])
 
-
   // const loadline = useRef<any>(null)
   // const observer = useRef<IntersectionObserver | null>(null)
   // useEffect(() => {

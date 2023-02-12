@@ -1,7 +1,16 @@
 .product_search
   @apply relative
+  @media (max-width: 602px)
+    grid-column: 2 / 3
+  @media (max-width: 482px)
+    grid-column: 1
+    grid-row: 1 / 2
+
+
   input
     @apply px-3 rounded-2xl shadow-md h-8 focus:outline-0
+    @media (max-width: 482px)
+      @apply w-full
 
 .filter_item
   @apply cursor-pointer hover:bg-slate-400 hover:text-white py-2 px-4

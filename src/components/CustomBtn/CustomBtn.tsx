@@ -7,7 +7,7 @@ type Props = {
   classname?: string
 };
 
-export function CustomBtn({text, onClick, classname}: Props) {
+export function CustomBtn({ text, onClick, classname }: Props) {
   return (
     <button className={[styles.custom_button, classname].join(' ')} onClick={onClick}>
       {text}

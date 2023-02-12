@@ -16,8 +16,6 @@ const responsive = {
   1024: { items: 3 }
 }
 
-
-
 const Slider = ({ products }: Props) => {
   const items = products.map(prod => (
     <div key={prod.id} className={styles.item_wrapper}>

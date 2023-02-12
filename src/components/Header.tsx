@@ -18,7 +18,7 @@ interface Props {
 
 const Header = ({ setVisible }: Props) => {
 
-  const { username, isAuth } = useAppSelector(state => state.main)
+  const { username, isAuth } = useAppSelector(state => state.auth)
   const cart = useAppSelector(state => state.products.productsInCart)
   const dispatch = useAppDispatch()
   const [cartVisible, setCartVisible] = useState(false)
@@ -55,7 +55,7 @@ const Header = ({ setVisible }: Props) => {
       <div className={styles.user_block}>
         <div className={styles.basket} onClick={() => {
           isAuth ?
-          setCartVisible(!cartVisible) : setTooltip(true)
+            setCartVisible(!cartVisible) : setTooltip(true)
         }}>
           {cart.length && isAuth ? (
             <>
@@ -64,7 +64,7 @@ const Header = ({ setVisible }: Props) => {
                 {cart.length}
               </span>
             </>
-          ) : <SlBasket /> }
+          ) : <SlBasket />}
           <span className={tooltip ? [styles.tooltip, styles.tooltip_active].join(' ') : styles.tooltip}>
             Login please
           </span>
@@ -94,7 +94,8 @@ const Header = ({ setVisible }: Props) => {
                           {+cardItem.product.price * cardItem.quantity} $
                         </div>
                       </div>
-                      <NavLink className={styles.item_link} to={`/product/${cardItem.product.id}`}>{cardItem.product.title}</NavLink>
+                      <NavLink className={styles.item_link}
+                               to={`/product/${cardItem.product.id}`}>{cardItem.product.title}</NavLink>
                       <span
                         className={styles.delete_product}
                         onClick={() => dispatch(removeFromCart(cardItem.product.id))}
@@ -104,7 +105,7 @@ const Header = ({ setVisible }: Props) => {
                 </ul>
                 <div className={styles.checkout_block}>
                   <span>TOTAL: {(cart.reduce((total, el) => (total + el.quantity * +el.product.price), 0)).toFixed(2)} $</span>
-                  <CustomBtn text='Checkout' classname={styles.button_class}/>
+                  <CustomBtn text='Checkout' classname={styles.button_class} />
                 </div>
               </>
             ) : <p>Your cart is empty ???!! Why</p>

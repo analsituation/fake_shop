@@ -3,6 +3,7 @@ import styles from './Search.module.sass'
 import { useDebounce } from '../../hooks/debounce'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { searchProducts } from '../../store/productsSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Search = () => {
 
@@ -14,8 +15,9 @@ const Search = () => {
 
   const inputFocus = useRef(null)
   const [focused, setFocus] = useState(false)
+  const navigate = useNavigate()
 
-  const changeHandler = (e:  React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
 
@@ -30,14 +32,13 @@ const Search = () => {
 
   function renderDropdown() {
     if (filteredProducts.length === 0) {
-      return <p className="text-center">No results!</p>
+      return <p className='text-center'>No results!</p>
     }
 
     return filteredProducts.map(product => (
       <li
         key={product.id}
-        // onClick={() => navigate(`/`)}
-        onClick={() => console.log(product.title)}
+        onMouseDown={() => navigate(`/product/${product.id}`)}
         className={styles.filter_item}
       >{product.title}</li>
     ))
@@ -54,9 +55,9 @@ const Search = () => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      { dropdown && focused && <ul className={styles.dropdown}>
-        { renderDropdown() }
-      </ul> }
+      {dropdown && focused && <ul className={styles.dropdown}>
+        {renderDropdown()}
+      </ul>}
     </div>
   )
 }
