@@ -1,0 +1,85 @@
+.drop_menu
+  @apply px-4 py-5  border rounded-xl absolute z-20 shadow-md right-0 top-14 font-light w-full
+  background: var(--element)
+  color: var(--element-text)
+  display: none
+  min-width: 400px
+  font-size: 14px
+
+
+  .close_button
+    @apply absolute top-1 right-2 cursor-pointer rounded  transition-colors
+    font-size: 25px
+    color: var(--element-text)
+
+    &:hover
+      color: var(--primary)
+
+
+  .cart_item
+    @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
+    grid-template-columns: 20% auto 10%
+
+    .info_block
+      display: grid
+      grid-template-columns: 25% auto
+      gap: 15px
+      align-items: center
+      width: 100%
+
+      .item_img
+        max-height: 80px
+        background-color: #fff
+        padding: 5px
+
+
+    .delete_product
+      @apply italic text-gray-300 cursor-pointer transition-colors
+      color: var(--element-text)
+      grid-column: 3 / 4
+      align-self: center
+      justify-self: end
+
+      &:hover
+        color: var(--primary)
+
+
+    .buttons_wrapper
+      @apply flex items-center justify-center
+
+      .quantity
+        @apply mx-2
+
+
+      .changeQuantity
+        @apply cursor-pointer inline-block transition-colors
+        font-size: 13px
+        &:hover
+          color: var(--primary)
+
+
+    .cost
+      @apply text-center mt-1
+
+
+    .item_link
+      @apply text-left transition-colors
+      
+
+  .checkout_block
+    @apply flex justify-between items-center mt-5
+
+
+.cart_active
+  display: block
+
+
+.button_class
+  @apply transition-colors 
+  border: 1px solid var(--element-text)
+  box-shadow: none
+
+  
+.button_class:hover
+  border: 1px solid var(--primary-lighter)
+  box-shadow: none

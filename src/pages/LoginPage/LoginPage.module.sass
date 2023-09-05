@@ -1,28 +1,66 @@
 .login_block
-  @apply w-full p-10
+  @apply w-full px-10
+  color: var(--text)
+
   .page_title
-    @apply text-cyan-700 text-3xl text-center
+    @apply text-3xl text-center font-medium
+    color: var(--primary)
+
+  
   .page_info
     @apply mt-5 text-xl text-center
+
+    .api_link
+      color: var(--primary)
+      position: relative
+      
+      &::after
+       content: ''
+       position: absolute
+       width: 100%
+       height: 1px
+       bottom: 0
+       left: 0
+       right: 0
+       background-color: var(--primary)
+       opacity: 0
+       transition: opacity .2s ease
+
+      &:hover.api_link::after
+        opacity: 1
+
+
   .inner_block
     @apply grid grid-cols-2 mt-16
+
     @media (max-width: 769px)
       @apply flex flex-col-reverse
+
+
     .form_wrapper
       @apply mx-auto self-start
       width: 80%
+
       @media (max-width: 902px)
         width: 100%
+
       @media (max-width: 769px)
         width: 70%
+
       @media (max-width: 586px)
         width: 90%
 
+
 .titles
-  @apply grid grid-cols-2 text-cyan-700 text-xl
+  @apply grid grid-cols-2 text-xl font-medium
+  color: var(--primary)
+
   @media (max-width: 769px)
     @apply text-center mt-6
+
+
 .userdata_items
   @apply grid grid-cols-2
+
   @media (max-width: 769px)
     @apply text-center

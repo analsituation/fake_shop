@@ -1,0 +1,32 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@import './fonts.sass'
+@import './vars.sass'
+
+
+html[data-theme='light']
+  --primary: #{$primary}
+  --primary-lighter: #{$primary-lighter}
+  --bg: #{$cream}
+  --bg-second: #{$nutmeg}
+  --element: #{$lighter-olive}
+  --element-text: #{$nutmeg}
+  --text: #{$oak-chips}
+
+html[data-theme='dark']
+  --primary: #{$primary}
+  --primary-lighter: #{$primary-lighter}
+  --bg: #{$lighter-olive}
+  --bg-second: #{$dark-olive}
+  --element: #{$sgushenka}
+  --element-text: #{$oak-chips}
+  --text: #{$nutmeg}
+
+body
+  font-family: $mainfont
+
+  ::selection
+    background-color: var(--primary-lighter)
+    color: $white

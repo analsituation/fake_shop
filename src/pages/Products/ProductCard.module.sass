@@ -1,51 +1,106 @@
+$element: var(--element)
+$bgg: var(--bg-second)
+
 .card_item
-  @apply text-cyan-700 p-4 border rounded-3xl shadow-md bg-white relative overflow-hidden flex
-  flex-direction: column
+  @apply rounded-3xl flex-col shadow-md bg-white relative overflow-hidden flex pt-6 pb-8
+  height: 100%
+  color: var(--text)
+  border: 3px double var(--text)
+  background: var(--bg-second)
+  box-shadow: 0 0 10px 2px var(--bg-second)
+
+  .top_row
+    padding: 0 20px
+
 
   .title
-    @apply font-medium mb-4 flex items-center
-    min-height: 50px
-  .info_clock
+    @apply font-medium flex items-center min-h-[50px] transition-colors
+    color: var(--text)
+      
+
+  .info_block
     @apply flex justify-between
+
     .category
-      @apply bg-slate-300 px-3 py-1 rounded-2xl w-fit
+      @apply rounded-2xl w-fit px-3 py-1 mt-2 font-medium
+      background-color: rgba(#000, 0.2)
+      color: var(--primary-lighter)
+      
+
     .rating
-      @apply mr-3 flex items-center gap-x-2
+      @apply flex items-center gap-x-2
+
       svg
         @apply mt-0.5
+        
+
   .image
-    @apply mt-8 h-72 flex items-center justify-center
+    @apply mt-5 h-72 flex items-center justify-center
+    padding: 10px 0
+    width: 100%
+    flex: 1 0 auto
+    background: #fff
+    
     img
       max-width: 100%
       max-height: 100%
+      object-fit: cover
 
-  .description
-    @apply mt-8 pr-5 text-slate-800
 
-    .show_desc
-        @apply text-cyan-700 italic cursor-pointer
+  .bottom_row
+    display: flex
+    flex-direction: column
+    padding: 10px 20px 0
+    height: 100%
 
-    .long_desc_content
-      @apply block absolute bg-slate-500 text-gray-300 w-full h-fit p-4 pb-10 left-0 right-0
-      bottom: -100%
-      transition: all 0.4s ease-in-out
-      &:hover
+    .description
+      @apply mt-2
+      flex: 1 0 auto
+
+      .show_desc
+        @apply cursor-pointer italic
+        color: var(--primary-lighter)
+
+
+      .show_desc:hover .part_of_desc
+        opacity: 0
+
+
+      .long_desc_content
+        @apply block absolute w-full h-fit p-6 py-12 left-0 right-0 z-10
+        bottom: -100%
+        transition: all 0.4s ease-in-out
+        color: var(--text)
+        background: var(--bg-second)
+        background: linear-gradient(0deg, var(--bg-second) 0%, var(--bg-second) 80%, transparent 100%)
+
+        &:hover
+          @apply bottom-0
+
+
+      .show_desc:hover + .long_desc_content
         @apply bottom-0
 
-    .show_desc:hover + .long_desc_content
-      @apply bottom-0
 
-  .buy_block_wrapper
-    margin-top: auto
-    margin-bottom: 10px
-    .buy_block
-      @apply mt-4 flex items-center gap-x-6 min-h-full
-      .buttons_wrapper
-        @apply flex items-center
-        .quantity
-          @apply mx-5
-        .changeQuantity
-          @apply text-cyan-700 inline-block cursor-pointer
+    .buy_block_wrapper
+      margin-top: 10px
+
+      .buy_block
+        @apply mt-2 flex items-center gap-x-6 text-[18px] min-h-[40px]
+
+        .buttons_wrapper
+          @apply flex items-center
+
+          .quantity
+            @apply mx-5
+
+  
+          .changeQuantity
+            @apply inline-block cursor-pointer transition-colors
+            color: var(--text)
+
+            &:hover
+              color: var(--primary)
 
 
 

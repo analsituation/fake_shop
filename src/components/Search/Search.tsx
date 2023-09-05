@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styles from './Search.module.sass'
-import { useDebounce } from '../../hooks/debounce'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { searchProducts } from '../../store/productsSlice'
 import { useNavigate } from 'react-router-dom'
 
-const Search = () => {
+import { searchProducts } from 'store/productsSlice'
+import { useDebounce } from 'hooks/debounce'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 
+import styles from './Search.module.sass'
+
+const Search = () => {
   const dispatch = useAppDispatch()
   const filteredProducts = useAppSelector(state => state.products.filteredProducts)
   const [value, setValue] = useState('')
@@ -36,11 +37,12 @@ const Search = () => {
     }
 
     return filteredProducts.map(product => (
-      <li
-        key={product.id}
-        onMouseDown={() => navigate(`/product/${product.id}`)}
-        className={styles.filter_item}
-      >{product.title}</li>
+      <li key={product.id} onMouseDown={() => navigate(`/product/${product.id}`)} className={styles.filter_item}>
+        <div className={styles.item_img}>
+          <img src={product.image} alt={product.title} />
+        </div>
+        <div className={styles.item_title}>{product.title}</div>
+      </li>
     ))
   }
 
@@ -55,9 +57,7 @@ const Search = () => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      {dropdown && focused && <ul className={styles.dropdown}>
-        {renderDropdown()}
-      </ul>}
+      {dropdown && focused && <ul className={styles.dropdown}>{renderDropdown()}</ul>}
     </div>
   )
 }

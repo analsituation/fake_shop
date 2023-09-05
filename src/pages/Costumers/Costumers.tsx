@@ -1,12 +1,9 @@
 import React from 'react'
 
+import styles from './Costumers.module.sass'
+
 const Costumers = () => {
-  return (
-    <div className='text-2xl'>
-      Unfortunately, nothing here..<br />
-      All functionality is concentrated in products page
-    </div>
-  )
+  return <div className={styles.costumers_info}>Nothing interesting here.</div>
 }
 
 export default Costumers

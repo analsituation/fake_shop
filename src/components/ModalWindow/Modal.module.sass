@@ -1,28 +1,52 @@
 .overlay
-  @apply fixed left-0 right-0 top-0 bottom-0 bg-slate-900 bg-opacity-80 z-20 flex justify-center items-center
+  @apply fixed left-0 right-0 top-0 bottom-0 bg-slate-900 bg-opacity-90 z-20 flex justify-center items-center
+
 
 .modal_window
-  @apply p-5 rounded-3xl bg-gray-200 relative
-  width: 350px
-  .form_title
-    @apply text-xl text-cyan-700 font-medium
+  @apply px-6 py-10 rounded relative
+  background: #1E1F27
+  color: $elephant-tusk
+  width: 450px
+
+  .top_row
+    display: flex
+    align-items: center
+    text-align: center
+    margin-bottom: 40px
+
+    .form_title
+      @apply text-xl font-medium
+      font-size: 24px
+      margin: 0 auto
+      width: 80%
+
+
+    .close_button
+      @apply absolute cursor-pointer transition-colors
+      font-size: 22px 
+      right: 15px
+      top: 15px
+      &:hover
+        color: #AB0000
+
   .form_text
-    @apply mt-3 mb-3
+    width: 80%
+    margin: 0 auto
+    margin-top: 20px
+
     a
-      @apply text-cyan-700
+      color: var(--primary-lighter)
       animation: blink 1.3s infinite
+
+
 @keyframes blink
   0%
     opacity: 1
   50%
-    opacity: 0.6
+    opacity: 0.7
   100%
     opacity: 1
 
+
 .overlay.active
   @apply flex justify-center items-center
-
-.close_button
-  @apply absolute top-3 right-4 cursor-pointer hover:text-red-600
-
-

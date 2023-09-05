@@ -1,37 +1,39 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IProduct } from 'types/Product'
+import { IUser } from 'types/User'
 
 export const queryApi = createApi({
   reducerPath: 'api/user',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://fakestoreapi.com/'
   }),
-  endpoints: (build) => ({
-    loadPartProducts: build.query({
+  endpoints: build => ({
+    loadPartProducts: build.query<IProduct[], number | undefined>({
       query: (limit = 6) => ({
         url: `products?limit=${limit}`
       })
     }),
-    loadAllProducts: build.query({
+    loadAllProducts: build.query<IProduct[], void>({
       query: () => ({
-        url: `products`
+        url: 'products'
       })
     }),
-    loadCategories: build.query({
+    loadCategories: build.query<string[], void>({
       query: () => ({
-        url: `products/categories`
+        url: 'products/categories'
       })
     }),
-    loadProduct: build.query({
+    loadProduct: build.query<IProduct, number>({
       query: (id: number) => ({
         url: `products/${id}`
       })
     }),
-    loadCategory: build.query({
+    loadCategory: build.query<IProduct[], string>({
       query: (category: string) => ({
         url: `products/category/${category}`
       })
     }),
-    login: build.mutation({
+    login: build.mutation<{ token: string }, { username: string; password: string }>({
       query: ({ username, password }) => ({
         url: 'auth/login',
         method: 'POST',
@@ -45,9 +47,9 @@ export const queryApi = createApi({
         })
       })
     }),
-    getUsers: build.query({
+    getUsers: build.query<IUser[], void>({
       query: () => ({
-        url: `users`
+        url: 'users'
       })
     })
   })
@@ -62,4 +64,3 @@ export const {
   useLazyLoadCategoryQuery,
   useGetUsersQuery
 } = queryApi
-

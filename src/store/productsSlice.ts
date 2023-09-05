@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IProduct, ProductsInCart } from '../types/Product'
+import { IProduct, ProductsInCart } from 'types/Product'
 
 interface StateType {
   products: IProduct[]
@@ -29,8 +29,7 @@ export const productSlice = createSlice({
       )
     },
     filterProducts: (state, action: PayloadAction<string[]>) => {
-      state.filteredProducts = state.products.filter(el =>
-        action.payload.includes(el.category))
+      state.filteredProducts = state.products.filter(el => action.payload.includes(el.category))
     },
     addToCart: (state, action: PayloadAction<IProduct>) => {
       state.productsInCart.push({ product: action.payload, quantity: 1 })
@@ -48,14 +47,7 @@ export const productSlice = createSlice({
   }
 })
 
-export const {
-  setProducts,
-  searchProducts,
-  filterProducts,
-  addToCart,
-  removeFromCart,
-  changeQuantity
-} = productSlice.actions
+export const { setProducts, searchProducts, filterProducts, addToCart, removeFromCart, changeQuantity } =
+  productSlice.actions
 
 export default productSlice.reducer
-

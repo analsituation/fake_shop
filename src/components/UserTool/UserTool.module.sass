@@ -1,0 +1,88 @@
+.user_tool
+  display: flex
+  align-items: center
+  justify-content: center
+  inset: 0
+
+  
+.wrapper 
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+
+
+.inner_div 
+  height: 40px
+  width: 40px
+  margin-left: 4px
+  padding: 4px 10px
+  border-radius: 8px
+  display: inline-flex
+  align-items: center
+  white-space: nowrap
+  overflow: hidden
+  cursor: pointer
+  transition: width 300ms ease-in-out 0s, background-color 300ms linear 200ms
+  color: var(--text)
+
+  .button_title
+    text-align: center
+
+
+.icon 
+  display: flex
+  align-items: center
+  height: 36px
+  aspect-ratio: 1 / 1
+
+
+.inner_div:hover,
+.inner_div:focus-visible 
+  width: 125px
+  background-color: var(--bg)
+  color: var(--text)
+  transition: width 300ms ease-in-out 0s, background-color 100ms linear 0s
+
+
+.inner_div:focus-visible 
+  outline: 1px solid var(--primary)
+  outline-offset: 4px
+
+
+.inner_div:active 
+  opacity: 0.9
+
+
+.spacer 
+  flex-grow: 1
+
+
+.divider 
+  height: 28px
+  width: 1px
+  margin: 8px 0
+  margin-right: 20px
+  background-color: var(--text)
+
+
+@keyframes fadeIn 
+  0% 
+    opacity: 0
+  
+  50% 
+    opacity: 0
+  
+  100% 
+    opacity: 1
+
+
+.basket
+  @apply cursor-pointer text-xl relative
+
+  @media (max-width: 1024px)
+    @apply mr-4
+
+  .count
+    @apply absolute -right-2 top-0
+    font-size: 12px

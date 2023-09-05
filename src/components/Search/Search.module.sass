@@ -1,20 +1,62 @@
 .product_search
   @apply relative
+
   @media (max-width: 602px)
     grid-column: 2 / 3
+
   @media (max-width: 482px)
     grid-column: 1
     grid-row: 1 / 2
 
 
   input
-    @apply px-3 rounded-2xl shadow-md h-8 focus:outline-0
+    @apply px-8 rounded-2xl shadow-md h-8 focus:outline-0
+    font-family: $elements-font
+    background: var(--element)
+    font-weight: 300
+    color: var(--element-text)
+
+  input::placeholder
+    opacity: 0.5
+    color: var(--element-text)
+    font-weight: 300
+
     @media (max-width: 482px)
       @apply w-full
 
-.filter_item
-  @apply cursor-pointer hover:bg-slate-400 hover:text-white py-2 px-4
 
-.dropdown
-  @apply absolute top-[40px] right-0 left-0 bg-white border shadow-lg z-10 rounded-2xl overflow-hidden
+.filter_item
+  @apply cursor-pointer relative flex
   font-size: 14px
+  background: var(--bg)
+  color: var(--text)
+  border-bottom: 1px solid var(--text)
+  overflow: hidden
+
+  &:last-child
+    border-bottom: none
+
+  
+  .item_img
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    width: 60px
+    height: 100%
+    background-color: #fff
+        
+
+    img
+      max-height: 100%
+      object-fit: cover
+
+
+  .item_title
+    padding: 20px 10px 20px 80px
+
+   
+.dropdown
+  @apply absolute top-[40px] min-w-[350px] left-0 shadow-lg z-10 rounded-2xl overflow-hidden
+  font-size: 14px
+  border: 1px solid var(--element)

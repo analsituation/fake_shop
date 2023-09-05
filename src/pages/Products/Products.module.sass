@@ -1,26 +1,35 @@
 .filter_block
   @apply flex w-full gap-x-10 items-center
+
   @media (max-width: 1024px)
     @apply block
+
   @media (max-width: 602px)
     @apply grid grid-cols-2 grid-rows-1 items-start
+
   @media (max-width: 482px)
     @apply grid-cols-1
 
+
 .product_list
   @apply mt-12 grid grid-cols-3 gap-6
+
   @media (max-width: 1024px)
     @apply grid-cols-2 mt-8
+
   @media (max-width: 602px)
     @apply grid-cols-1
 
 
 .info_message
-  @apply block text-3xl text-cyan-700 mx-auto w-full text-center
+  @apply block text-3xl mx-auto w-full text-center
   grid-column: 1 / 4
+  color: var(--text)
+
 
 .load_all
   @apply text-center mt-10
 
+  
 .spinner_wrapper
   @apply text-center mt-6

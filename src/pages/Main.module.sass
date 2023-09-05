@@ -1,11 +1,20 @@
 .app_wrapper
-  @apply min-h-screen bg-zinc-200
+  @apply min-h-screen
+  background-color: var(--bg-second)
 
 .container
   @apply max-w-7xl mx-auto
 
 .content_wrapper
-  @apply mt-16 rounded-3xl p-16 shadow-2xl bg-zinc-100
+  @apply mt-10 rounded-3xl p-16 shadow-2xl
+  background-color: var(--bg)
   min-height: 80vh
+  
   @media (max-width: 1024px)
     @apply p-10
+
+// Error page
+
+.error_page
+  color: var(--primary)
+  font-size: 32px

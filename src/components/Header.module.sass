@@ -1,13 +1,26 @@
+html[data-theme='light']
+  --nav-font-weight: 500
+
+html[data-theme='dark']
+  --nav-font-weight: 300
+
 .container
   @apply grid items-center px-10 py-6
   grid-template-columns: 1fr auto 1fr
   align-items: center
+
   @media (max-width: 769px)
     @apply px-8
     grid-template-columns: 1fr 1fr
 
+
   .nav
-    @apply justify-self-center py-2 px-10 bg-slate-800 text-gray-100 rounded-full
+    @apply justify-self-center py-2 px-10 rounded-full
+    font-family: $elements-font
+    font-weight: var(--nav-font-weight)
+    color: var(--text)
+    background: var(--bg)
+
     @media (max-width: 769px)
       @apply px-5 mt-6
       grid-column: 1 / 3
@@ -15,121 +28,81 @@
 
     ul
       @apply flex items-center gap-10
+
       @media (max-width: 481px)
         @apply gap-4
 
+
       .link_element
-        @apply block font-light uppercase relative text-[12px] text-center
-        letter-spacing: 2px
+        @apply block uppercase relative text-[14px] text-center
+        letter-spacing: 1px
         transition: all 0.4s ease
+
+
       .link_element::after
         content: ""
         position: absolute
         height: 1px
-        background-color: #16afda
+        background-color: var(--primary)
         width: 0
         left: 50%
         bottom: 0
         transform: translateX(-50%)
-        transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) all
+        transition: 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55) all
+
+
       .link_element:hover
-        color: #16afda
+        color: var(--primary)
+
+
       .link_element:hover::after
         width: 100%
+
+
   .logo
-    @apply justify-self-start uppercase text-2xl font-medium text-center text-cyan-600
+    @apply justify-self-start text-center font-semibold
+    color: var(--primary)
+    text-shadow: 0 0 4px rgba(#fff, 0.05), 0 0 15px rgba(#fff, 0.07), 0 0 20px rgba(#fff, 0.1)
+    font-family: $logo-font
+    font-size: 32px
+    font-weight: 700
+    
     @media (max-width: 769px)
       grid-column: 1 / 2
       grid-row: 1 / 2
 
 
 .user_block
-  @apply justify-self-end flex inline-block items-center relative transition-all
+  @apply justify-self-end flex items-center relative transition-all
+
   @media (max-width: 769px)
     grid-column: 2 / 3
     grid-row: 1 / 2
 
+
   .user_wrapper
     @apply grid grid-cols-2 grid-rows-1 gap-4 relative overflow-hidden py-1 min-h-fit
     grid-template-columns: auto 100px
+
     @media (max-width: 1024px)
       @apply gap-0 h-10
 
-    .user_photo
-      @apply max-h-10 rounded-full z-10
-      grid-column: 1 / 2
-      @media (max-width: 1024px)
-        display: none
 
-    .username
-      @apply transition-all absolute left-0 w-full text-center
-      grid-column: 2 / 3
-      align-self: center
-    .button_wrapper
-      @apply transition-all absolute -right-40 p-1
-      grid-column: 2 / 3
-      align-self: center
+  .login_button
+    background: var(--bg)
+    color: var(--text)
+    border: 1px solid var(--text)    
+  
+    &:hover
+      color: var(--primary)
+      border: 1px solid var(--primary-lighter)
+
+    &:hover.login_button::after
+      opacity: 0
 
 
 .user_wrapper:hover .username
   @apply absolute -left-40 opacity-0
+
 .user_wrapper:hover .button_wrapper
   @apply absolute right-0
-
-
-.basket
-  @apply mr-8 cursor-pointer text-xl relative
-  @media (max-width: 1024px)
-    @apply mr-4
-
-  .count
-    @apply absolute -right-2 top-0
-    font-size: 12px
-  .tooltip
-    @apply w-32 py-2 px-3 bg-slate-800 text-white absolute rounded-md opacity-75 text-center text-sm top-8 -left-12
-    visibility: hidden
-    z-index: 1
-  .tooltip_active
-    visibility: visible
-    transition: all 0.8s ease
-
-
-.drop_menu
-  @apply px-2 py-5 bg-slate-800 text-gray-200 border rounded-xl absolute z-10 shadow-md shadow-gray-500 right-0 top-14 font-light w-full
-  display: none
-  min-width: 250px
-  font-size: 12px
-  .close_button
-    @apply absolute -top-1 -right-1 cursor-pointer bg-gray-100 rounded text-slate-800
-    font-size: 15px
-    &:hover
-      @apply bg-red-300
-
-  .cart_item
-    @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
-    grid-template-columns: 1fr auto 1fr
-    .delete_product
-      @apply italic text-gray-300 cursor-pointer hover:text-red-400
-      grid-column: 3 / 4
-      align-self: center
-      justify-self: end
-    .buttons_wrapper
-      @apply flex items-center
-      .quantity
-        @apply mx-2
-      .changeQuantity
-        @apply cursor-pointer inline-block hover:text-cyan-500 transition-colors
-        font-size: 13px
-    .cost
-      @apply text-center mt-1
-    .item_link
-      @apply text-left hover:text-cyan-500 transition-colors
-
-  .checkout_block
-    @apply flex justify-between items-center mt-5
-
-.cart_active
-  display: block
-
-.button_class
-  @apply hover:shadow-slate-700 hover:shadow-md
