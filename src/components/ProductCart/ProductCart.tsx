@@ -71,7 +71,7 @@ const ProductCart: FC<TooltipProps> = ({ opened, triggerRef, onClose, cart }) =>
                   </div>
                   <div className={styles.cost}>{(+cardItem.product.price * cardItem.quantity).toFixed(2)} $</div>
                 </div>
-                <NavLink className={styles.item_link} to={`/product/${cardItem.product.id}`}>
+                <NavLink className={styles.item_link} onClick={onClose} to={`/product/${cardItem.product.id}`}>
                   <div className={styles.info_block}>
                     <div className={styles.item_img}>
                       <img src={cardItem.product.image} alt={cardItem.product.title} />

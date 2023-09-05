@@ -35,7 +35,7 @@ const ProductCard = ({ product, quantity, isCategory = true, isDescription = tru
       <div className={styles.top_row}>
         <div className={styles.title}>
           <NavLink className={styles.item_link} to={`/product/${product.id}`}>
-            {product.title.length > 65 ? product.title.substring(0, 65) + '...' : product.title}
+            {product.title}
           </NavLink>
         </div>
         {isCategory && (

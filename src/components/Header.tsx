@@ -15,7 +15,7 @@ interface Props {
 
 const Header = ({ setVisible }: Props) => {
   const { theme, setTheme } = useTheme()
-  const changeTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+  const changeTheme = () => setTheme()
 
   const { username, isAuth } = useAppSelector(state => state.auth)
   const cart = useAppSelector(state => state.products.productsInCart)

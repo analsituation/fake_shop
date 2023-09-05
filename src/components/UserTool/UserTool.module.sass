@@ -15,6 +15,8 @@
 .inner_div 
   height: 40px
   width: 40px
+  margin-top: 20px
+  margin-bottom: 20px
   margin-left: 4px
   padding: 4px 10px
   border-radius: 8px
@@ -30,6 +32,8 @@
     text-align: center
 
 
+
+
 .icon 
   display: flex
   align-items: center
@@ -37,12 +41,20 @@
   aspect-ratio: 1 / 1
 
 
-.inner_div:hover,
-.inner_div:focus-visible 
-  width: 125px
-  background-color: var(--bg)
-  color: var(--text)
-  transition: width 300ms ease-in-out 0s, background-color 100ms linear 0s
+@media (hover: hover)
+  .inner_div:hover,
+  .inner_div:focus-visible 
+    width: 125px
+    background-color: var(--bg)
+    color: var(--text)
+    transition: width 300ms ease-in-out 0s, background-color 100ms linear 0s
+
+@media (hover: none)
+  .inner_div:last-child
+    width: 125px
+    background-color: var(--bg)
+    color: var(--text)
+    margin-left: 20px
 
 
 .inner_div:focus-visible 
@@ -61,9 +73,13 @@
 .divider 
   height: 28px
   width: 1px
-  margin: 8px 0
+  margin: 8px
   margin-right: 20px
   background-color: var(--text)
+  
+  @media (max-width: 1200px)
+    display: none
+
 
 
 @keyframes fadeIn 

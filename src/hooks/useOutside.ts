@@ -15,7 +15,6 @@ export function useOutsideClick({ elementRef, triggerRef, enabled = true, onOuts
     if (!enabled) {
       return
     }
-    console.log('attach event listener')
     const handleClick = (e: MouseEvent | TouchEvent) => {
       const target = e.target
       if (!(target instanceof Node)) {
@@ -33,7 +32,6 @@ export function useOutsideClick({ elementRef, triggerRef, enabled = true, onOuts
       }
 
       if (!ignoreElements.some(element => element.contains(target))) {
-        console.log('outside click')
         handleOutsideClick(e)
       }
     }
