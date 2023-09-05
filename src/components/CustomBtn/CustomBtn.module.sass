@@ -1,6 +1,11 @@
+html[data-theme='light']
+  --btn-font-weight: 400
+html[data-theme='dark']
+  --btn-font-weight: 500
+
 .custom_button
   @apply px-8 py-1 rounded transition-all relative
-  font-weight: 500
+  font-weight: var(--btn-font-weight)
   color: var(--element-text) 
   background-color: var(--element)
     

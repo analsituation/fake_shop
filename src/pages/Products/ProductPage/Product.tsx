@@ -122,7 +122,7 @@ const Product = () => {
             <SwiperComponent>
               {productsForCarousel.map((prod: IProduct) => (
                 <SwiperSlide key={prod.id} style={{ height: '100% !important' }}>
-                  <ProductCard product={prod} isCategory={false} isBuy={false} />
+                  <ProductCard product={prod} isCategory={false} />
                 </SwiperSlide>
               ))}
             </SwiperComponent>

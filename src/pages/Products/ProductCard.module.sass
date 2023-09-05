@@ -1,5 +1,6 @@
-$element: var(--element)
-$bgg: var(--bg-second)
+$bp-md: 600px
+$bp-lg: 800px
+$whitesmoke: whitesmoke
 
 .card_item
   @apply rounded-3xl flex-col shadow-md bg-white relative overflow-hidden flex pt-6 pb-8
@@ -10,7 +11,7 @@ $bgg: var(--bg-second)
   box-shadow: 0 0 10px 2px var(--bg-second)
 
   .top_row
-    padding: 0 20px
+    padding: 0 25px
 
 
   .title
@@ -32,78 +33,150 @@ $bgg: var(--bg-second)
 
       svg
         @apply mt-0.5
-        
 
-  .image
-    @apply mt-5 h-72 flex items-center justify-center
-    padding: 10px 0
-    width: 100%
-    flex: 1 0 auto
-    background: #fff
-    
-    img
+
+.card
+  @apply mt-5 flex items-center justify-center
+  padding: 20px 10px
+  width: 100%
+  flex: 1 0 auto
+  background: #fff 
+  position: relative
+  display: flex
+  align-items: center
+  overflow: hidden
+  width: 100%
+  text-align: center
+  color: $whitesmoke
+
+  img
       max-width: 100%
       max-height: 100%
       object-fit: cover
 
-
-  .bottom_row
-    display: flex
-    flex-direction: column
-    padding: 10px 20px 0
-    height: 100%
-
-    .description
-      @apply mt-2
-      flex: 1 0 auto
-
-      .show_desc
-        @apply cursor-pointer italic
-        color: var(--primary-lighter)
-
-
-      .show_desc:hover .part_of_desc
-        opacity: 0
-
-
-      .long_desc_content
-        @apply block absolute w-full h-fit p-6 py-12 left-0 right-0 z-10
-        bottom: -100%
-        transition: all 0.4s ease-in-out
-        color: var(--text)
-        background: var(--bg-second)
-        background: linear-gradient(0deg, var(--bg-second) 0%, var(--bg-second) 80%, transparent 100%)
-
-        &:hover
-          @apply bottom-0
+  
+  @media (min-width: $bp-md) 
+    height: 350px
+     
+  
+  &:after 
+    content: ''
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 200%
+    pointer-events: none
+    background-image: linear-gradient(to bottom, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.029) 11.7%, hsla(0, 0%, 0%, 0.054) 22.1%, hsla(0, 0%, 0%, 0.082) 31.2%, hsla(0, 0%, 0%, 0.143) 39.4%, hsla(0, 0%, 0%, 0.202) 46.6%, hsla(0, 0%, 0%, 0.269) 53.1%, hsla(0, 0%, 0%, 0.340) 58.9%, hsla(0, 0%, 0%, 0.414) 64.3%, hsla(0, 0%, 0%, 0.488) 69.3%, hsla(0, 0%, 0%, 0.560) 74.1%, hsla(0, 0%, 0%, 0.607) 78.8%, hsla(0, 0%, 0%, 0.668) 83.6%, hsla(0, 0%, 0%, 0.711) 88.7%, hsla(0, 0%, 0%, 0.772) 94.1%, hsla(0, 0%, 0%, 0.790) 100%)
+    transform: translateY(-50%)
+    transition: transform calc(700ms * 2) cubic-bezier(0.19, 1, 0.22, 1)  
 
 
-      .show_desc:hover + .long_desc_content
+.content 
+  position: absolute
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  padding: 1rem
+  transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1)
+  z-index: 1
+
+
+
+.copy 
+  font-size: 12px
+  font-style: italic
+
+
+@media (hover: hover) and (min-width: $bp-md) 
+  .card:after 
+    transform: translateY(0)
+  
+  
+  .content 
+    transform: translateY(calc(100% - 4.5rem))
+    
+    > *:not(.title) 
+      opacity: 0
+      transform: translateY(1rem)
+      transition: transform 700ms cubic-bezier(0.19, 1, 0.22, 1), opacity 700ms cubic-bezier(0.19, 1, 0.22, 1)
+    
+  
+  
+  .card:hover,
+  .card:focus-within 
+    align-items: center
+
+    &:before
+      transform: translateY(-4%) 
+    &:after
+      transform: translateY(-50%) 
+
+    .content 
+      transform: translateY(0)
+
+      > *:not(.title) 
+        opacity: 1
+        transform: translateY(0)
+        transition-delay: calc(700ms / 8)
+   
+
+.bottom_row
+  display: flex
+  flex-direction: column
+  padding: 10px 25px 0
+  height: 100%
+
+  .description
+    @apply mt-2
+    flex: 1 0 auto
+
+    .show_desc
+      @apply cursor-pointer italic
+      color: var(--primary-lighter)
+
+
+    .show_desc:hover .part_of_desc
+      opacity: 0
+
+
+    .long_desc_content
+      @apply block absolute w-full h-fit p-6 py-12 left-0 right-0 z-10
+      bottom: -100%
+      transition: all 0.4s ease-in-out
+      color: var(--text)
+      background: var(--bg-second)
+      background: linear-gradient(0deg, var(--bg-second) 0%, var(--bg-second) 80%, transparent 100%)
+
+      &:hover
         @apply bottom-0
 
 
-    .buy_block_wrapper
-      margin-top: 10px
-
-      .buy_block
-        @apply mt-2 flex items-center gap-x-6 text-[18px] min-h-[40px]
-
-        .buttons_wrapper
-          @apply flex items-center
-
-          .quantity
-            @apply mx-5
-
-  
-          .changeQuantity
-            @apply inline-block cursor-pointer transition-colors
-            color: var(--text)
-
-            &:hover
-              color: var(--primary)
+    .show_desc:hover + .long_desc_content
+      @apply bottom-0
 
 
+  .buy_block_wrapper
+    margin-top: 10px
 
+    .buy_block
+      @apply flex items-center justify-between gap-x-6 text-[18px] min-h-[40px]
+
+      .buttons_wrapper
+        @apply flex items-center
+
+        .quantity
+          @apply mx-5
+
+
+        .changeQuantity
+          @apply inline-block cursor-pointer transition-colors
+          color: var(--text)
+
+          &:hover
+            color: var(--primary)
 
 
 

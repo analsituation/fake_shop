@@ -9,7 +9,7 @@ import { IProduct } from 'types/Product'
 
 import styles from './ProductCard.module.sass'
 
-interface Props {
+interface ProductCard {
   product: IProduct
   quantity?: number
   isCategory?: boolean
@@ -17,7 +17,7 @@ interface Props {
   isBuy?: boolean
 }
 
-const ProductCard = ({ product, quantity, isCategory = true, isDescription = true, isBuy = true }: Props) => {
+const ProductCard = ({ product, quantity, isCategory = true, isDescription = true, isBuy = true }: ProductCard) => {
   const dispatch = useAppDispatch()
 
   const minusHandler = () => {
@@ -48,28 +48,28 @@ const ProductCard = ({ product, quantity, isCategory = true, isDescription = tru
           </span>
         )}
       </div>
-      <div className={styles.image}>
+      <div className={styles.card}>
         <img src={product.image} alt={product.title} />
+        <div className={styles.content}>
+          {isDescription && (
+            <div className={styles.description}>
+              {product.description.length > 400 ? (
+                <>
+                  <span className={styles.part_of_desc}>{product.description.slice(0, 400)} ...</span>
+                </>
+              ) : (
+                product.description
+              )}
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.bottom_row}>
-        {isDescription && (
-          <div className={styles.description}>
-            {product.description.length > 150 ? (
-              <>
-                <span className={styles.part_of_desc}>{product.description.slice(0, 100)} </span>
-                <span className={styles.show_desc}>...read more</span>
-                <span className={styles.long_desc_content}>{product.description}</span>
-              </>
-            ) : (
-              product.description
-            )}
-          </div>
-        )}
         {isBuy && (
           <div className={styles.buy_block_wrapper}>
             <div className={styles.buy_block}>
               {!quantity ? (
-                <CustomBtn text='BUY' onClick={() => dispatch(addToCart(product))} />
+                <CustomBtn text='Add to cart' onClick={() => dispatch(addToCart(product))} />
               ) : (
                 <div className={styles.buttons_wrapper}>
                   <span className={styles.changeQuantity} onClick={minusHandler}>
