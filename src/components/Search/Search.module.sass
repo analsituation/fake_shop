@@ -5,6 +5,7 @@
     grid-column: 2 / 3
 
   @media (max-width: 482px)
+    width: 100%
     grid-column: 1
     grid-row: 1 / 2
 
@@ -15,6 +16,12 @@
     background: var(--element)
     font-weight: 300
     color: var(--element-text)
+
+    @media (max-width: 602px)
+      @apply px-4
+
+    @media (max-width: 482px)
+      width: 100%
 
   input::placeholder
     opacity: 0.5

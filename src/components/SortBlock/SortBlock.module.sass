@@ -35,11 +35,17 @@ html[data-theme='dark']
     &:first-child
       @apply pl-8
 
+      @media (max-width: 1024px)
+        @apply pl-5
+
     &:last-child
       @apply pr-8
 
+      @media (max-width: 1024px)
+        @apply pr-5
+
     @media (max-width: 602px)
-      @apply px-8 py-2
+      @apply px-5 py-2
 
   
   .active

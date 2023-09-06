@@ -65,6 +65,7 @@ const ProductCard = ({ product, quantity, isCategory = true, isDescription = tru
         </div>
       </div>
       <div className={styles.bottom_row}>
+        {isDescription && <div className={styles.description_touchscreen}>{product.description}</div>}
         {isBuy && (
           <div className={styles.buy_block_wrapper}>
             <div className={styles.buy_block}>

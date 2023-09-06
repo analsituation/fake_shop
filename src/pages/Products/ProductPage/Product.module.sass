@@ -1,109 +1,113 @@
 .product_block
   display: grid
   grid-template-columns: 30% auto
-  gap: 40px
+  grid-auto-rows: max-content
+  gap: 20px 40px
   color: var(--text)
 
-  @media (max-width: 902px)
-    @apply grid-cols-5
+  @media (max-width: 992px)
+    grid-template-columns: 35% auto
 
-  @media (max-width: 769px)
-    @apply grid-cols-4 gap-x-5
+  @media (max-width: 850px)
+    grid-template-columns: 40% auto
+  
+  @media (max-width: 768px)
+    grid-template-columns: 45% auto
 
-  @media (max-width: 702px)
-    @apply flex flex-col
-
-
-  .product_image
-    // grid-column: 1 / 3
-
-    @media (max-width: 902px)
-      // grid-column: 1 / 3
-
-    @media (max-width: 702px)
-      display: none
-
-    .img_wrapper
-      @apply border rounded-xl shadow overflow-hidden p-4 bg-white
-      border: 1px solid rgba(0, 0, 0, 0.4)
-
-
-  .product_info
-    @apply text-xl
-
-    @media (max-width: 902px)
-
-    @media (max-width: 702px)
-      @apply text-base
-
-    .hidden_image
-      @apply mx-auto
-      max-width: 70%
-      display: none
-
-      .img_wrapper
-        @apply border border-slate-400 rounded-xl shadow overflow-hidden mt-6
-
-      @media (max-width: 702px)
-        display: block
-
-      @media (max-width: 480px)
-        max-width: 90%
+  @media (max-width: 640px)
+    grid-template-columns: 1fr
 
   
-    .product_title
-      .rating
-        @apply flex items-center gap-x-2 text-base mt-2
-        opacity: 0.9
+  .img_wrapper
+    grid-column: 1 / 2
+    grid-row: 1 / 5
+    @apply rounded-xl shadow overflow-hidden p-4 bg-white flex items-center justify-center
+    border: 1px solid rgba(0, 0, 0, 0.4)
 
-      .title
-        @apply text-2xl font-medium
-        color: var(--primary)
+    img
+      max-height: 100%
 
-        @media (max-width: 702px)
-          @apply text-xl
+    @media (max-width: 992px)
+      grid-row: 1 / 4
 
+    @media (max-width: 768px)
+      order: 2
 
-    .product_descr
-      @apply mt-8 pr-10 font-medium
-      color: var(--text)
+    @media (max-width: 640px)
+      grid-column: 1 / 2
+      grid-row: 3 / 4
+      order: 3
+      max-height: 50vh
 
-      @media (max-width: 902px)
-        @apply mt-6
+  
+  .product_title
+    grid-column: 2 / 3
 
-      .description_title
-        color: var(--primary)
-        font-size: 20px 
+    @media (max-width: 640px)
+      grid-column: 1 / 2
+      order: 1
 
-      .description
-        @apply block font-light mb-2
-        font-size: 18px 
-        color: var(--text)
-        opacity: 0.9
+    .rating
+      @apply flex items-center gap-x-2 text-base mt-2
+      opacity: 0.9
 
-
-  .buy_block
-    @apply mt-8
-
-    @media (max-width: 902px)
-      @apply mt-6
-
-    .price
-      @apply block mb-3 
+    .title
+      @apply text-2xl font-medium
       color: var(--primary)
 
-    .buttons_wrapper
-      @apply flex items-center
+      @media (max-width: 702px)
+        @apply text-xl
 
-      .quantity
-        @apply mx-5
 
-      .changeQuantity
-        @apply inline-block cursor-pointer
-        &:hover
-          color: var(--primary)
-
-  
-.categories .category_title
-    @apply mt-10 text-2xl 
+  .product_descr
+    grid-column: 2 / 3
+    @apply pr-10 font-medium
     color: var(--text)
+
+    @media (max-width: 768px)
+      grid-column: 1 / 3
+      order: 4
+
+    @media (max-width: 640px)
+      grid-column: 1 / 2
+
+    .description_title
+      color: var(--primary)
+      font-size: 20px 
+
+    .description
+      @apply block font-light mb-2
+      font-size: 18px 
+      color: var(--text)
+      opacity: 0.9
+
+
+.buy_block
+  grid-column: 2 / 3
+
+  @media (max-width: 902px)
+    @apply mt-6
+
+  @media (max-width: 640px)
+    grid-column: 1 / 2
+    order: 2
+
+  .price
+    @apply block mb-3 text-2xl
+    color: var(--primary)
+
+  .buttons_wrapper
+    @apply flex items-center
+
+    .quantity
+      @apply mx-5
+
+    .changeQuantity
+      @apply inline-block cursor-pointer
+      &:hover
+        color: var(--primary)
+
+
+.categories .category_title
+  @apply mt-10 text-2xl 
+  color: var(--text)

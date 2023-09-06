@@ -4,13 +4,21 @@ html[data-theme='dark']
   --cart-font-weight: 500
   
 .drop_menu
-  @apply px-4 py-5  border rounded-xl absolute z-20 shadow-md right-0 top-14 w-full
+  @apply px-4 py-5 border rounded-xl absolute z-20 shadow-md right-0 top-[100%] w-full
   background: var(--element)
   color: var(--element-text)
   font-weight: var(--cart-font-weight)
   display: none
-  min-width: 400px
+  width: 400px
   font-size: 14px
+
+  @media (max-width: 576px)
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    width: 100vw
+    font-size: 16px
 
 
   .close_button
@@ -26,6 +34,9 @@ html[data-theme='dark']
     @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
     grid-template-columns: 20% auto 10%
 
+    @media (max-width: 576px)
+      grid-template-columns: 30% 1fr
+
     .info_block
       display: grid
       grid-template-columns: 25% auto
@@ -38,6 +49,10 @@ html[data-theme='dark']
         background-color: #fff
         padding: 5px
 
+        img
+          max-height: 100%
+          object-fit: contain
+
 
     .delete_product
       @apply italic text-gray-300 cursor-pointer transition-colors
@@ -48,6 +63,9 @@ html[data-theme='dark']
 
       &:hover
         color: var(--primary)
+
+      @media (max-width: 576px)
+        display: none
 
 
     .buttons_wrapper

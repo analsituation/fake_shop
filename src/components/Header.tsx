@@ -17,10 +17,10 @@ const Header = ({ setVisible }: Props) => {
   const { theme, setTheme } = useTheme()
   const changeTheme = () => setTheme()
 
+  const [tooltip, setTooltip] = useState(false)
+
   const { username, isAuth } = useAppSelector(state => state.auth)
   const cart = useAppSelector(state => state.products.productsInCart)
-
-  const [tooltip, setTooltip] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,32 +30,34 @@ const Header = ({ setVisible }: Props) => {
 
   return (
     <header className={styles.container}>
-      <div className={styles.logo}>Fake shop</div>
+      <div className={styles.header_row}>
+        <div className={styles.logo}>Fake shop</div>
 
-      <nav className={styles.nav}>
-        <ul>
-          <li className={styles.link_element}>
-            <NavLink to='/'>Home</NavLink>
-          </li>
-          <li className={styles.link_element}>
-            <NavLink to='products'>Products</NavLink>
-          </li>
-          <li className={styles.link_element}>
-            <NavLink to='costumers'>Our Costumers</NavLink>
-          </li>
-        </ul>
-      </nav>
+        <nav className={styles.nav}>
+          <ul>
+            <li className={styles.link_element}>
+              <NavLink to='/'>Home</NavLink>
+            </li>
+            <li className={styles.link_element}>
+              <NavLink to='products'>Products</NavLink>
+            </li>
+            <li className={styles.link_element}>
+              <NavLink to='costumers'>Community</NavLink>
+            </li>
+          </ul>
+        </nav>
 
-      <div className={styles.user_block}>
-        <ThemeSwitcher checked={theme === 'dark' ? true : false} onchange={changeTheme} />
+        <div className={styles.user_block}>
+          <ThemeSwitcher checked={theme === 'dark' ? true : false} onchange={changeTheme} />
 
-        {isAuth ? (
-          <>
-            <UserTool isAuth={isAuth} cart={cart}></UserTool>
-          </>
-        ) : (
-          <CustomBtn text='Login' classname={styles.login_button} onClick={() => setVisible(true)} />
-        )}
+          {isAuth ? (
+            <>
+              <UserTool isAuth={isAuth} cart={cart}></UserTool>
+            </>
+          ) : (
+            <CustomBtn text='Login' classname={styles.login_button} onClick={() => setVisible(true)} />
+          )}
+        </div>
       </div>
     </header>
   )
