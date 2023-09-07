@@ -1,5 +1,5 @@
 # Fake shop
-## this is my first terrible pet-project
+## It's just a parody of an online store, you can't buy anything there
 
 [live app hosted on vercel](https://fake-shop-coral.vercel.app/)
 _(the start page may take a little longer to load on poor internet due to the welcome gif.)_
