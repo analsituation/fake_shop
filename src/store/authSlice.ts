@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { IAuthUserInfo } from 'types/User'
+import { IAuthUserInfo } from 'customTypes/User'
 
 const data: any = localStorage.getItem('AuthUserInfo')
 const parse: IAuthUserInfo = JSON.parse(data)

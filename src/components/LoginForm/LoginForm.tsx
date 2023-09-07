@@ -3,9 +3,9 @@ import { AiOutlineLock } from 'react-icons/ai'
 import { AiOutlineUser } from 'react-icons/ai'
 
 import Spinner from '../LoadingSpinner/Spinner'
-import { useLoginMutation } from 'store/queryApi'
-import { login } from 'store/authSlice'
-import { useAppDispatch } from 'hooks/redux'
+import { useLoginMutation } from '@store/queryApi'
+import { login } from '@store/authSlice'
+import { useAppDispatch } from '@hooks/redux'
 
 import styles from './LoginForm.module.sass'
 

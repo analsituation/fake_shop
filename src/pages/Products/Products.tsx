@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
 import ProductCard from './ProductCard'
-import CustomBtn from 'components/CustomBtn/CustomBtn'
-import Spinner from 'components/LoadingSpinner/Spinner'
-import Search from 'components/Search/Search'
-import SortBlock from 'components/SortBlock/SortBlock'
+import CustomBtn from '@components/CustomBtn/CustomBtn'
+import Spinner from '@components/LoadingSpinner/Spinner'
+import Search from '@components/Search/Search'
+import SortBlock from '@components/SortBlock/SortBlock'
 
-import { useLazyLoadAllProductsQuery, useLoadCategoriesQuery, useLoadPartProductsQuery } from 'store/queryApi'
-import { filterProducts, setProducts } from 'store/productsSlice'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { IProduct } from 'types/Product'
+import { useLazyLoadAllProductsQuery, useLoadCategoriesQuery, useLoadPartProductsQuery } from '@store/queryApi'
+import { filterProducts, setProducts } from '@store/productsSlice'
+import { useAppDispatch, useAppSelector } from '@hooks/redux'
+import { IProduct } from 'customTypes/Product'
 
 import styles from './Products.module.sass'
 

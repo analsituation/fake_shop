@@ -1,14 +1,14 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import Layout from 'pages/Layout'
-import Home from 'pages/Home/Home'
-import Costumers from 'pages/Costumers/Costumers'
-import ErrorPage from 'pages/ErrorPage'
-import LoginPage from 'pages/LoginPage/LoginPage'
-import Products from 'pages/Products/Products'
-import Product from 'pages/Products/ProductPage/Product'
-import RequireAuth from 'hocs/RequireAuth'
+import Layout from '@pages/Layout'
+import Home from '@pages/Home/Home'
+import Costumers from '@pages/Costumers/Costumers'
+import ErrorPage from '@pages/ErrorPage'
+import LoginPage from '@pages/LoginPage/LoginPage'
+import Products from '@pages/Products/Products'
+import Product from '@pages/Products/ProductPage/Product'
+import RequireAuth from '@hocs/RequireAuth'
 
 const App = () => {
   return (

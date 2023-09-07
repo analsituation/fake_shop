@@ -2,10 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle, AiOutlineStar } from 'react-icons/ai'
 
-import CustomBtn from 'components/CustomBtn/CustomBtn'
-import { addToCart, changeQuantity, removeFromCart } from 'store/productsSlice'
-import { useAppDispatch } from 'hooks/redux'
-import { IProduct } from 'types/Product'
+import CustomBtn from '@components/CustomBtn/CustomBtn'
+import { addToCart, changeQuantity, removeFromCart } from '@store/productsSlice'
+import { useAppDispatch } from '@hooks/redux'
+import { IProduct } from 'customTypes/Product'
 
 import styles from './ProductCard.module.sass'
 

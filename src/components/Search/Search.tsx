@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { searchProducts } from 'store/productsSlice'
-import { useDebounce } from 'hooks/debounce'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { searchProducts } from '@store/productsSlice'
+import { useDebounce } from '@hooks/debounce'
+import { useAppDispatch, useAppSelector } from '@hooks/redux'
 
 import styles from './Search.module.sass'
 

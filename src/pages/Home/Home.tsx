@@ -1,6 +1,6 @@
 import React from 'react'
 
-import welcome from 'assets/welcome.gif'
+import welcome from '@assets/welcome.gif'
 
 import styles from './Home.module.sass'
 

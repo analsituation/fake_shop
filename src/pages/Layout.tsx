@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 
-import Header from 'components/Header'
-import LoginForm from 'components/LoginForm/LoginForm'
-import Modal from 'components/ModalWindow/Modal'
-import { useAppSelector } from 'hooks/redux'
+import Header from '@components/Header'
+import LoginForm from '@components/LoginForm/LoginForm'
+import Modal from '@components/ModalWindow/Modal'
+import { useAppSelector } from '@hooks/redux'
 
 import styles from './Main.module.sass'
 

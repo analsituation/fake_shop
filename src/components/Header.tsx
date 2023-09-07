@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from 'hooks/redux'
 import { NavLink } from 'react-router-dom'
 
 import CustomBtn from './CustomBtn/CustomBtn'
 import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher'
 import UserTool from './UserTool/UserTool'
-import { useTheme } from 'hooks/useTheme'
+import { useTheme } from '@hooks/useTheme'
+import { useAppSelector } from '@hooks/redux'
 
 import styles from './Header.module.sass'
 

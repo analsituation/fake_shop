@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from './redux'
-import { changeTheme } from 'store/themeSlice'
+import { changeTheme } from '@store/themeSlice'
 
 export const useTheme = () => {
   // const [theme, setTheme] = useState('light')

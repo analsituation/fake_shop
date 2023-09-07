@@ -1,10 +1,10 @@
 import React, { FC, PropsWithChildren, useRef, useState } from 'react'
 import { SlBasket, SlBasketLoaded } from 'react-icons/sl'
 
-import ProductCart from 'components/ProductCart/ProductCart'
-import { logout } from 'store/authSlice'
-import { useAppDispatch } from 'hooks/redux'
-import { ProductsInCart } from 'types/Product'
+import ProductCart from '@components/ProductCart/ProductCart'
+import { logout } from '@store/authSlice'
+import { ProductsInCart } from 'customTypes/Product'
+import { useAppDispatch } from '@hooks/redux'
 
 import styles from './UserTool.module.sass'
 

@@ -4,11 +4,11 @@ import { MdOutlineClose } from 'react-icons/md'
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai'
 import clsx from 'clsx'
 
-import CustomBtn from 'components/CustomBtn/CustomBtn'
-import { changeQuantity, removeFromCart } from 'store/productsSlice'
-import { useAppDispatch } from 'hooks/redux'
-import { useOutsideClick } from 'hooks/useOutside'
-import { ProductsInCart } from 'types/Product'
+import CustomBtn from '@components/CustomBtn/CustomBtn'
+import { changeQuantity, removeFromCart } from '@store/productsSlice'
+import { useAppDispatch } from '@hooks/redux'
+import { useOutsideClick } from '@hooks/useOutside'
+import { ProductsInCart } from 'customTypes/Product'
 
 import styles from './ProductCart.module.sass'
 

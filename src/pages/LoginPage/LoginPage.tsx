@@ -1,11 +1,11 @@
 import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
-import LoginForm from 'components/LoginForm/LoginForm'
-import Spinner from 'components/LoadingSpinner/Spinner'
-import { useGetUsersQuery } from 'store/queryApi'
-import { useAppSelector } from 'hooks/redux'
-import { IUser } from 'types/User'
+import LoginForm from '@components/LoginForm/LoginForm'
+import Spinner from '@components/LoadingSpinner/Spinner'
+import { useGetUsersQuery } from '@store/queryApi'
+import { useAppSelector } from '@hooks/redux'
+import { IUser } from 'customTypes/User'
 
 import styles from './LoginPage.module.sass'
 

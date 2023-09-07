@@ -1,14 +1,21 @@
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CracoAlias = require('craco-alias')
 
 module.exports = {
-  webpack: {
-    plugins: [new TsconfigPathsPlugin()]
-  },
+  plugins: [
+    {
+      plugin: CracoAlias,
+      options: {
+        source: 'tsconfig',
+        baseUrl: './src',
+        tsConfigPath: './tsconfig.paths.json'
+      }
+    }
+  ],
   style: {
     sass: {
       loaderOptions: {
         additionalData: `
-          @import "src/styles/_vars.sass"
+            @import "src/styles/_vars.sass"
 `
       }
     }
