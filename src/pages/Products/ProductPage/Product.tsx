@@ -112,8 +112,8 @@ const Product = () => {
           <div className={styles.slider_wrapper}>
             <SwiperComponent>
               {productsForCarousel.map((prod: IProduct) => (
-                <SwiperSlide key={prod.id} style={{ height: '100% !important' }}>
-                  <ProductCard product={prod} isCategory={false} />
+                <SwiperSlide key={prod.id}>
+                  <ProductCard product={prod} isCategory={false} isBuy={false} />
                 </SwiperSlide>
               ))}
             </SwiperComponent>
