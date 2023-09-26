@@ -7,11 +7,14 @@ import { ProductsInCart } from 'customTypes/Product'
 import { useAppDispatch } from '@hooks/redux'
 
 import styles from './UserTool.module.sass'
+import { createPortal } from 'react-dom'
 
 interface UserToolProps {
   isAuth: boolean
   cart: ProductsInCart[]
 }
+
+const portalElement = document.getElementById('portal_id')
 
 const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart }) => {
   const cartRef = useRef<HTMLDivElement>(null)
@@ -54,7 +57,6 @@ const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart
               ) : (
                 <SlBasket />
               )}
-              {/* <span className={clsx(styles.tooltip, tooltip && styles.tooltip_active)}>Login please</span> */}
             </div>
           </div>
           <span className={styles.button_title}>Cart</span>
@@ -79,7 +81,7 @@ const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart
           <span className={styles.button_title}>Logout</span>
         </div>
       </div>
-      <ProductCart opened={cartVisible} onClose={onClose} cart={cart} />
+      {createPortal(<ProductCart opened={cartVisible} onClose={onClose} cart={cart} />, document.body)}
     </div>
   )
 }

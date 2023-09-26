@@ -4,6 +4,9 @@
   justify-content: center
   inset: 0
 
+  @media (max-width: 912px)
+    align-self: end
+
   
 .wrapper 
   width: 100%
@@ -30,8 +33,6 @@
 
   .button_title
     text-align: center
-
-
 
 
 .icon 
@@ -79,8 +80,7 @@
   
   @media (max-width: 1200px)
     display: none
-
-
+    
 
 @keyframes fadeIn 
   0% 
@@ -95,9 +95,6 @@
 
 .basket
   @apply cursor-pointer text-xl relative
-
-  @media (max-width: 1024px)
-    @apply mr-4
 
   .count
     @apply absolute -right-2 top-0

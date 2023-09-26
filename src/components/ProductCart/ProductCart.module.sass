@@ -4,18 +4,30 @@ html[data-theme='dark']
   --cart-font-weight: 500
   
 .drop_menu
-  @apply px-4 py-5 border rounded-xl absolute z-20 shadow-md right-0 top-[100%] w-full
+  @apply px-4 py-5 border rounded-xl absolute shadow-md w-full
+  z-index: 12
   background: var(--element)
   color: var(--element-text)
   font-weight: var(--cart-font-weight)
   display: none
-  width: 400px
+  width: 450px
   font-size: 14px
+  
+
+  @media (min-width: 993px)
+    top: 100px
+    right: 20%
+
+  @media (min-width: 577px) and (max-width: 992px)
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
   @media (max-width: 576px)
     position: fixed
     top: 0
     right: 0
+    left: 0
     bottom: 0
     width: 100vw
     font-size: 16px
@@ -32,7 +44,7 @@ html[data-theme='dark']
 
   .cart_item
     @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
-    grid-template-columns: 20% auto 10%
+    grid-template-columns: 15% auto 10%
 
     @media (max-width: 576px)
       grid-template-columns: 30% 1fr
@@ -45,13 +57,14 @@ html[data-theme='dark']
       width: 100%
 
       .item_img
-        max-height: 80px
+        max-height: 100px
         background-color: #fff
         padding: 5px
+        overflow: hidden
 
         img
-          max-height: 100%
-          object-fit: contain
+          @apply h-full
+        
 
 
     .delete_product
