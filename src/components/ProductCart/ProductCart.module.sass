@@ -4,14 +4,12 @@ html[data-theme='dark']
   --cart-font-weight: 500
   
 .drop_menu
-  @apply px-4 py-5 border rounded-xl absolute shadow-md w-full
+  @apply px-4 py-5 border rounded-xl absolute shadow-md w-full hidden text-sm
   z-index: 12
   background: var(--element)
   color: var(--element-text)
   font-weight: var(--cart-font-weight)
-  display: none
   width: 450px
-  font-size: 14px
   
 
   @media (min-width: 993px)
@@ -27,10 +25,10 @@ html[data-theme='dark']
     position: fixed
     top: 0
     right: 0
-    left: 0
     bottom: 0
     width: 100vw
     font-size: 16px
+    border-radius: 0
 
 
   .close_button
@@ -43,36 +41,31 @@ html[data-theme='dark']
 
 
   .cart_item
-    @apply p-1 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
+    @apply px-1 py-2 mb-2 border-b grid grid-cols-3 grid-rows-1 items-center gap-x-4
     grid-template-columns: 15% auto 10%
 
     @media (max-width: 576px)
       grid-template-columns: 30% 1fr
 
     .info_block
-      display: grid
-      grid-template-columns: 25% auto
-      gap: 15px
-      align-items: center
-      width: 100%
+      @apply relative w-full h-full flex items-center
 
       .item_img
-        max-height: 100px
-        background-color: #fff
-        padding: 5px
-        overflow: hidden
+        @apply flex items-center justify-center absolute w-[60px] h-full bg-white    
 
         img
-          @apply h-full
+          max-height: 100%
+          object-fit: cover
+
+      span
+        padding-left: 70px
+
         
 
-
     .delete_product
-      @apply italic text-gray-300 cursor-pointer transition-colors
+      @apply italic text-gray-300 cursor-pointer transition-colors items-center justify-end
       color: var(--element-text)
       grid-column: 3 / 4
-      align-self: center
-      justify-self: end
 
       &:hover
         color: var(--primary)
@@ -91,6 +84,7 @@ html[data-theme='dark']
       .changeQuantity
         @apply cursor-pointer inline-block transition-colors
         font-size: 13px
+        
         &:hover
           color: var(--primary)
 
@@ -100,9 +94,8 @@ html[data-theme='dark']
 
 
     .item_link
-      @apply text-left transition-colors
+      @apply text-left transition-colors h-full block items-center
       
-
   .checkout_block
     @apply flex justify-between items-center mt-5
 
@@ -112,11 +105,10 @@ html[data-theme='dark']
 
 
 .button_class
-  @apply transition-colors 
+  @apply transition-colors shadow-none	
   border: 1px solid var(--element-text)
-  box-shadow: none
 
   
 .button_class:hover
   border: 1px solid var(--primary-lighter)
-  box-shadow: none
+  

@@ -13,16 +13,18 @@ html[data-theme='dark']
     @apply flex flex-col pt-16 gap-5 fixed top-0 bottom-0 right-0 w-[40%]
     background-color: var(--bg-second)
     z-index: 10
-    animation: menuHide 0.2s
+    opacity: 0.6
     transform: translateX(110%)
+    transition: all 0.2s ease-out
 
   @media ( max-width: 576px )
     width: 100%
     
 
 .header_row.active
-  animation: menuShow 0.2s
+  opacity: 1
   transform: translateX(0)
+  transition: all 0.2s ease-out
 
 
 .header_mobile_row
@@ -92,8 +94,10 @@ html[data-theme='dark']
   font-size: 32px
   font-weight: 700
 
+
 .mobile_logo   
   display: none 
+  
   @media (max-width: 912px)
     display: block
 
@@ -172,26 +176,9 @@ html[data-theme='dark']
   right: 0
   left: 0
   z-index: 9
-  background-color: rgba(#000, 0.1)
+  background-color: rgba(#000, 0.2)
   display: none
 
   &.active
     display: block
-
-
-@keyframes menuShow
-  0%
-    transform: translateX(110%)
-    opacity: 0.6
-  100%
-    transform: translateX(0)
-    opacity: 1
-
-@keyframes menuHide
-  0%
-    transform: translateX(0)
-    opacity: 1
-  100%
-    transform: translateX(110%)
-    opacity: 0.6
     

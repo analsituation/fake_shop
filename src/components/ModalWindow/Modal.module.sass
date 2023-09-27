@@ -9,16 +9,11 @@
   width: 450px
 
   .top_row
-    display: flex
-    align-items: center
-    text-align: center
-    margin-bottom: 40px
+    @apply flex items-center text-center mb-10
 
     .form_title
-      @apply text-xl font-medium
+      @apply text-xl font-medium w-[80%] mx-auto
       font-size: 24px
-      margin: 0 auto
-      width: 80%
 
 
     .close_button
@@ -26,13 +21,12 @@
       font-size: 22px 
       right: 15px
       top: 15px
+      
       &:hover
         color: #AB0000
 
   .form_text
-    width: 80%
-    margin: 0 auto
-    margin-top: 20px
+    @apply mt-5 w-[80%] mx-auto
 
     a
       color: var(--primary-lighter)

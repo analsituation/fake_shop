@@ -33,7 +33,7 @@ const Layout = () => {
             <LoginForm />
           </Modal>
         )}
-        <Header setVisible={setModal} />
+        <Header key={'header'} setVisible={setModal} />
         <div className={styles.content_wrapper}>
           <Outlet />
         </div>

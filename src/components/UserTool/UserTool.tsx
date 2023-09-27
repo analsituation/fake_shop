@@ -12,11 +12,10 @@ import { createPortal } from 'react-dom'
 interface UserToolProps {
   isAuth: boolean
   cart: ProductsInCart[]
+  setMenuShow: (status: false) => void
 }
 
-const portalElement = document.getElementById('portal_id')
-
-const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart }) => {
+const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart, setMenuShow }) => {
   const cartRef = useRef<HTMLDivElement>(null)
   const [cartVisible, setCartVisible] = useState(false)
 
@@ -27,6 +26,7 @@ const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart
   }
 
   const logoutHandler = () => {
+    setMenuShow(false)
     dispatch(logout())
   }
 
@@ -42,6 +42,7 @@ const UserTool: FC<PropsWithChildren<UserToolProps>> = ({ children, isAuth, cart
           tabIndex={0}
           ref={cartRef}
           onClick={() => {
+            setMenuShow(false)
             if (isAuth) {
               setCartVisible(v => !v)
             }

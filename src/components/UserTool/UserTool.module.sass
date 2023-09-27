@@ -1,18 +1,9 @@
 .user_tool
-  display: flex
-  align-items: center
-  justify-content: center
-  inset: 0
-
-  @media (max-width: 912px)
-    align-self: end
+  @apply flex items-center justify-center inset-0
 
   
-.wrapper 
-  width: 100%
-  display: flex
-  align-items: center
-  justify-content: center
+.wrapper
+  @apply w-full flex items-center justify-center
 
 
 .inner_div 
@@ -50,6 +41,7 @@
     color: var(--text)
     transition: width 300ms ease-in-out 0s, background-color 100ms linear 0s
 
+
 @media (hover: none)
   .inner_div:last-child
     width: 125px
@@ -80,17 +72,6 @@
   
   @media (max-width: 1200px)
     display: none
-    
-
-@keyframes fadeIn 
-  0% 
-    opacity: 0
-  
-  50% 
-    opacity: 0
-  
-  100% 
-    opacity: 1
 
 
 .basket

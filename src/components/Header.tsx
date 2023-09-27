@@ -58,13 +58,19 @@ const Header = ({ setVisible }: Props) => {
           <nav className={styles.nav}>
             <ul>
               <li className={styles.link_element}>
-                <NavLink to='/'>Home</NavLink>
+                <NavLink onClick={() => setMenuShow(false)} to='/'>
+                  Home
+                </NavLink>
               </li>
               <li className={styles.link_element}>
-                <NavLink to='products'>Products</NavLink>
+                <NavLink onClick={() => setMenuShow(false)} to='products'>
+                  Products
+                </NavLink>
               </li>
               <li className={styles.link_element}>
-                <NavLink to='costumers'>Community</NavLink>
+                <NavLink onClick={() => setMenuShow(false)} to='costumers'>
+                  Community
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -74,10 +80,17 @@ const Header = ({ setVisible }: Props) => {
 
             {isAuth ? (
               <>
-                <UserTool isAuth={isAuth} cart={cart}></UserTool>
+                <UserTool setMenuShow={setMenuShow} isAuth={isAuth} cart={cart}></UserTool>
               </>
             ) : (
-              <CustomBtn text='Login' classname={styles.login_button} onClick={() => setVisible(true)} />
+              <CustomBtn
+                text='Login'
+                classname={styles.login_button}
+                onClick={() => {
+                  setVisible(true)
+                  setMenuShow(false)
+                }}
+              />
             )}
           </div>
         </div>
